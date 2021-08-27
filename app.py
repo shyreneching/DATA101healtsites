@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify
+from flask import Flask, Response
 import pandas as pd
 
 app = Flask(__name__)
@@ -42,11 +42,11 @@ def get_country_data(country):
     return Response(filtered_df, mimetype="application/json")
 
 @app.route('/bubblechart')
-def get_data():
+def get_bubble_data():
     df = pd.read_csv(actual_data_url)
 
     filtered_df = df[['Region', 'Province', 'Total - Grand Total', 'Total Amenities', 'Population']].copy()
-    filtered_df.columns - ['region', 'province', 'workers', 'sites', 'population']
+    filtered_df.columns = ['region', 'province', 'workers', 'sites', 'population']
 
     return Response(filtered_df.to_csv(), mimetype="text/csv")
 
@@ -61,7 +61,7 @@ def index():
     return app.send_static_file('index.html')
 
 @app.route('/bubble')
-def index():
+def bubble():
     return app.send_static_file('bubble.html')
 
 if __name__ == '__main__':
