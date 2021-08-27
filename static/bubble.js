@@ -2,10 +2,10 @@ $(document).ready(function(){
     var margin = {
         top: 10,
         right: 10,
-        bottom: 100,
-        left: 100
+        bottom: 50,
+        left: 80
     },
-    width = 900,
+    width = 750,
     height = 500,
     xMax, yMax, zMax, zMin, xScale, yScale, zScale, inFlag = false;
   
