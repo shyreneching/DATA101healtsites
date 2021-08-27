@@ -172,7 +172,7 @@ $(document).ready(function () {
       "translate(" + margin.left + "," + margin.top + ")");
 
   //Read the data
-  d3.csv('/data/Merged.csv', function (data) {
+  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function (data) {
 
     // Add X axis
     var x = d3.scaleLinear()
@@ -199,16 +199,52 @@ $(document).ready(function () {
       .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
       .range(d3.schemeSet2);
 
+    // -1- Create a tooltip div that is hidden by default:
+    var tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+
+    // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+    var showTooltip = function (d) {
+      tooltip
+        .transition()
+        .duration(200)
+      tooltip
+        .style("opacity", 1)
+        .html("Country: " + d.country)
+        .style("left", (d3.mouse(this)[0] + 30) + "px")
+        .style("top", (d3.mouse(this)[1] + 30) + "px")
+    }
+    var moveTooltip = function (d) {
+      tooltip
+        .style("left", (d3.mouse(this)[0] + 30) + "px")
+        .style("top", (d3.mouse(this)[1] + 30) + "px")
+    }
+    var hideTooltip = function (d) {
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+    }
+
     // Add dots
     svg.append('g')
       .selectAll("dot")
       .data(data)
       .enter()
       .append("circle")
+      .attr("class", "bubbles")
       .attr("cx", function (d) {
+        // Total Health worker
         return x(d.gdpPercap);
       })
       .attr("cy", function (d) {
+        // Total Ameneties
         return y(d.lifeExp);
       })
       .attr("r", function (d) {
@@ -217,9 +253,10 @@ $(document).ready(function () {
       .style("fill", function (d) {
         return myColor(d.Province);
       })
-      .style("opacity", "0.7")
-      .attr("stroke", "white")
-      .style("stroke-width", "2px")
+      // -3- Trigger the functions
+      .on("mouseover", showTooltip)
+      .on("mousemove", moveTooltip)
+      .on("mouseleave", hideTooltip)
 
   })
 });
