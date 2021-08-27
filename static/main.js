@@ -163,7 +163,7 @@ $(document).ready(function () {
     height = 420 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
-  var svg = d3.select("#my_dataviz")
+  var bubble = d3.select("#my_dataviz")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -186,7 +186,7 @@ $(document).ready(function () {
     var x = d3.scaleLinear()
       .domain([0, 12000])
       .range([0, width]);
-    svg.append("g")
+      bubble.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
     var y = d3.scaleLinear()
       .domain([35, 90])
       .range([height, 0]);
-    svg.append("g")
+      bubble.append("g")
       .call(d3.axisLeft(y));
 
     // Add a scale for bubble size
@@ -325,7 +325,7 @@ $(document).ready(function () {
     }
 
     // Add dots
-    svg.append('g')
+    bubble.append('g')
       .selectAll("dot")
       .data(data)
       .enter()
