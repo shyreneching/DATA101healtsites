@@ -24,14 +24,31 @@
     </div>
   </nav>
 
+  <div class="position-absolute top-80 end-0 float-right" id="floating_stats">
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <h1 id="healthcare_workers_total">289,578</h1>
+      <p>Healthcare Workers</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <p style="font-size:small; font-weight:bold">Types of Healthcare Workers</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <h1 id="healthsites_total">8,234</h1>
+      <p>Health Sites</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <p style="font-size:small; font-weight:bold">Health Sites Amenities</p>
+    </div>
+  </div>
+
   <div class="container-fluid" id="visualisations">
-    <div class="row h-75" id="map">
-      Hello
+    <div class="row h-75 shadow-sm p-3 mb-2 bg-white rounded" id="map">
+      INSERT MAP HERE
       <div class="accordion" id="map_filter_options">
         <div class="accordion-item">
           <h5 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Number of Healthsites per Region
+              Map Filter: Number of Healthsites per Region
             </button>
           </h5>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -41,7 +58,7 @@
                   Filter Healthcare Workers
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Healthcare Worker Type</label>
+                  <label class="filter-label">Healthcare Worker Type</label>
                   <select class="form-select" id="select_healthcare_worker_type" aria-label="Default select example">
                     <option value="" selected disabled>Select a worker type</option>
                     <option value="">All</option>
@@ -50,7 +67,7 @@
                   </select>
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Province</label>
+                  <label class="filter-label">Province</label>
                   <select class="form-select" id="select_province" aria-label="Default select example">
                     <option value="" selected disabled>Select a province</option>
                     <option value="">All</option>
@@ -59,7 +76,7 @@
                   </select>
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Region</label>
+                  <label class="filter-label">Region</label>
                   <select class="form-select" id="select_region" aria-label="Default select example">
                     <option value="" selected disabled>Select a region</option>
                     <option value="">All</option>
@@ -68,7 +85,7 @@
                   </select>
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Sector</label>
+                  <label class="filter-label">Sector</label>
                   <div class="form-check form-check-inline" style="margin-left: 6px">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radiobtn_public_sector" value="option1">
                     <label class="form-check-label" for="radiobtn_public_sector">Public</label>
@@ -86,7 +103,7 @@
                   Filter Health Sites
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Amenities</label>
+                  <label class="filter-label">Amenities</label>
                   <select class="form-select" id="select_amentity" aria-label="Default select example">
                     <option value="" selected disabled>Select an amenity type</option>
                     <option value="">All</option>
@@ -95,7 +112,7 @@
                   </select>
                 </div>
                 <div class="row" id="filter_item">
-                  <label>Location</label>
+                  <label class="filter-label">Location</label>
                   <select class="form-select" id="select_location" aria-label="Default select example">
                     <option value="" selected disabled>Select a location</option>
                     <option value="">All</option>
@@ -108,19 +125,28 @@
           </div>
         </div>
       </div>
+
     </div>
     <div class="row h-25" id="second_row">
-      <div class="col" id="num_healthsites_per_region">
-        <div id="pie_sites"></div>
+
+      <div class="col col-7.5 shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_per_region">
+        <h6>Number of Healthsites per Region</h6>
       </div>
-      <div class="col" id="num_healthsites_vs_healthcare_workers_per_region">
-        <div id="my_dataviz"></div>
+      <div class="col col-md-auto shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_vs_healthcare_workers_per_region">
+        <h6>Number of Healthsites vs Healthcare Workers per Region</h6>
+        <div>
+          <div style="height: 30px;">
+              <button id="bBack" style="display:none">Back</button>
+              <span id="regionname"></span>
+          </div>
+          <div id="my_dataviz" style="width: 750px; height: 500px;"></div>
+      </div>
       </div>
     </div>
   </div>
 
-
-  
-  <script type="text/javascript" src="static/main.js"></script>
+  <!-- <script type="text/javascript" src="static/main.js"></script> -->
+  <script type="text/javascript" src="static/draggable_div.js"></script>
+  <script type="text/javascript" src="static/bubble.js"></script>
 </body>
 </html>
