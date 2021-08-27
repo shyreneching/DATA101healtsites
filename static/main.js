@@ -172,11 +172,11 @@ $(document).ready(function () {
       "translate(" + margin.left + "," + margin.top + ")");
 
   //Read the data
-  d3.csv('/data', function (data) {
+  d3.csv('/data/Merged.csv', function (data) {
 
     // Add X axis
     var x = d3.scaleLinear()
-      .domain([0, 10000])
+      .domain([0, 12000])
       .range([0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -192,7 +192,12 @@ $(document).ready(function () {
     // Add a scale for bubble size
     var z = d3.scaleLinear()
       .domain([200000, 1310000000])
-      .range([1, 40]);
+      .range([4, 40]);
+
+    // Add a scale for bubble color
+    var myColor = d3.scaleOrdinal()
+      .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+      .range(d3.schemeSet2);
 
     // Add dots
     svg.append('g')
@@ -201,17 +206,20 @@ $(document).ready(function () {
       .enter()
       .append("circle")
       .attr("cx", function (d) {
-        return x(d.healthsites);
+        return x(d.gdpPercap);
       })
       .attr("cy", function (d) {
-        return y(d.healthworkers);
+        return y(d.lifeExp);
       })
       .attr("r", function (d) {
-        return z(d.population);
+        return z(d.Population);
       })
-      .style("fill", "#69b3a2")
+      .style("fill", function (d) {
+        return myColor(d.Province);
+      })
       .style("opacity", "0.7")
-      .attr("stroke", "black")
+      .attr("stroke", "white")
+      .style("stroke-width", "2px")
 
   })
 });
