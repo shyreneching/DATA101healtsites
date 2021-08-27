@@ -51,6 +51,18 @@ def get_bubble_data():
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
 
+@app.route('/pie')
+def get_pie_sites_data():
+    df = pd.read_csv(actual_data_url)
+
+    filtered_df = df[['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social_facility', 'Total Amenities']].copy()
+    filtered_df.columns = ['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social_facility', 'Total Amenities']
+
+    filtered_df=filtered_df.append(filtered_df.sum().rename('Total'))
+    filtered_df=filtered_df.iloc[-1]
+
+    return Response(filtered_df.to_csv(), mimetype="text/csv")
+
 # STATIC PAGES
 @app.route('/about')
 def about():

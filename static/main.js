@@ -159,7 +159,7 @@ $(document).ready(function () {
       bottom: 30,
       left: 50
     },
-    width = 500 - margin.left - margin.right,
+    width = 700 - margin.left - margin.right,
     height = 420 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
@@ -331,23 +331,23 @@ $(document).ready(function () {
       .style("color", "white")
 
     // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-    var showTooltip = function (event,d) {
+    var showTooltip = function (event, d) {
       console.log(d.province);
       tooltip
         .transition()
         .duration(200)
       tooltip
         .style("opacity", 1)
-        .html("Province: " + d.province + 
-              "<br>Health workers: " + d.workers +
-              "<br>Health sites: " + d.sites + 
-              "<br>Population: " + d.population)
+        .html("Province: " + d.province +
+          "<br>Health workers: " + d.workers +
+          "<br>Health sites: " + d.sites +
+          "<br>Population: " + d.population)
         .style("left", (event.pageX + 20) + "px")
         .style("top", (event.pageY - 90) + "px")
     }
     var moveTooltip = function (d) {
       tooltip
-        .style("left", (event.pageX +20) + "px")
+        .style("left", (event.pageX + 20) + "px")
         .style("top", (event.pageY - 90) + "px")
     }
     var hideTooltip = function (d) {
@@ -385,4 +385,138 @@ $(document).ready(function () {
       .on("mouseleave", hideTooltip)
 
   })
+
+  /////////////////////////
+  // FOR PIE CHART SITES //
+  /////////////////////////
+
+  // const pie_width = 800;
+  // const pie_height = 600;
+
+
+  // // Creates sources <svg> element
+  // const pie_sites = d3.select("#pie_sites")
+  //   .append("svg")
+  //   .attr("width", pie_width)
+  //   .attr("height", pie_height);
+
+  // d3.csv('/pie'), function (raw_data) {
+  //   return {
+  //     sites: raw_data.sites,
+  //     count: +raw_data.population,
+  //     province: raw_data.province
+  //   };
+  // }).then(function (data) {
+  //   const g = pie_sites.append("g")
+  //     .attr("transform", `translate(${pie_width / 2}, ${pie_height / 2})`);
+
+  //   const data = formatted_data;
+
+  //   const radius = Math.min(pie_width, pie_height) / 2;
+
+  //   const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  //   var tooltip = d3.select("#pie_sites")
+  //     .append("div")
+  //     .style("opacity", 0)
+  //     .attr("class", "tooltip")
+  //     .style("background-color", "black")
+  //     .style("border-radius", "5px")
+  //     .style("padding", "10px")
+  //     .style("color", "white")
+
+  //   // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  //   var tooltip = d3.select("#pie_sites")
+  //     .append("div")
+  //     .style("opacity", 0)
+  //     .attr("class", "tooltip")
+  //     .style("background-color", "black")
+  //     .style("border-radius", "5px")
+  //     .style("padding", "10px")
+  //     .style("color", "white")
+
+  //   var pie = d3.pie()
+  //     .sort(null)
+  //     .value(function (d) {
+  //       return d.population;
+  //     });
+
+  //   var path = d3.arc()
+  //     .outerRadius(radius - 10)
+  //     .innerRadius(0);
+
+  //   var label = d3.arc()
+  //     .outerRadius(radius - 40)
+  //     .innerRadius(radius - 40);
+
+  //   d3.csv("data.csv", function (d) {
+  //     d.population = +d.population;
+  //     return d;
+  //   }, function (error, data) {
+  //     if (error) throw error;
+
+  //     var arc = g.selectAll(".arc")
+  //       .data(pie(data))
+  //       .enter().append("g")
+  //       .attr("class", "arc");
+
+  //     arc.append("path")
+  //       .attr("d", path)
+  //       .attr("fill", function (d) {
+  //         return color(d.data.age);
+  //       });
+
+  //     arc.append("text")
+  //       .attr("transform", function (d) {
+  //         return "translate(" + label.centroid(d) + ")";
+  //       })
+  //       .attr("dy", "0.35em")
+  //       .text(function (d) {
+  //         return d.data.age;
+  //       });
+  //   });
+
+  //   // const arc = d3
+  //   //   .arc()
+  //   //   .outerRadius(radius - 10)
+  //   //   .innerRadius(0);
+
+  //   // const pie = d3.pie();
+
+  //   // const pied_data = pie(data);
+
+  //   // const arcs = g
+  //   //   .selectAll(".arc")
+  //   //   .data(pied_data)
+  //   //   .join((enter) => enter.append("path").attr("class", "arc").style("stroke", "white"));
+
+  //   // arcs.attr("d", arc).style("fill", (d, i) => color(i));
+
+  //   g.on('mouseover', function (event, d) {
+  //     tooltip
+  //       .transition()
+  //       .duration(200)
+  //     tooltip
+  //       .style("opacity", 1)
+  //       .html("Val: " + d)
+  //       .style("left", (event.pageX + 20) + "px")
+  //       .style("top", (event.pageY - 90) + "px")
+
+  //   });
+
+  //   g.on('mousemove', function (event, d) {
+  //     tooltip
+  //       .style("left", (event.pageX + 20) + "px")
+  //       .style("top", (event.pageY - 90) + "px")
+  //   });
+
+  //   g.on('mouseout', function () {
+  //     tooltip
+  //       .transition()
+  //       .duration(200)
+  //       .style("opacity", 0)
+  //   });
+  // });
+
+
 });
