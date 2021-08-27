@@ -48,8 +48,20 @@ def get_bubble_data():
     filtered_df = df[['Region', 'Province', 'Total - Grand Total', 'Total Amenities', 'Population']].copy()
     filtered_df.columns = ['region', 'province', 'workers', 'sites', 'population']
 
-    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
+    region_df = filtered_df[['region', 'workers', 'sites', 'population']].groupby(['region']).agg('sum').sort_values(by='population', ascending=False)
 
+    return Response(region_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubbleregion.csv"})
+
+@app.route('/bubblechart/<region>')
+def get_bubble_region(region):
+    df = pd.read_csv(actual_data_url)
+
+    filtered_df = df[['Region', 'Province', 'Total - Grand Total', 'Total Amenities', 'Population']].copy()
+    filtered_df.columns = ['region', 'province', 'workers', 'sites', 'population']
+
+    filtered_df = filtered_df[filtered_df['region'] == region].sort_values(by='population', ascending=False)
+
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
 # STATIC PAGES
 @app.route('/about')
@@ -59,6 +71,10 @@ def about():
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
+
+@app.route('/bubblemyles')
+def get_bubble_myles():
+    return app.send_static_file('bubble_myles.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
