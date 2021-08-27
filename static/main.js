@@ -180,26 +180,45 @@ $(document).ready(function () {
       population: +raw_data.population,
       province: raw_data.province
     };
-  }).then(function(data){
+  }).then(function (data) {
+
+    xMax = d3.max(data, function (d) {
+      return d.workers;
+    });
+
+    yMax = d3.max(data, function (d) {
+      return d.sites;
+    });
+
+    xScale = d3.scaleLinear([-10, xMax], [padding, width - padding]);
+
+    yScale = d3.scaleLinear([-50, yMax], [height - padding, padding]);
+
 
     // Add X axis
     var x = d3.scaleLinear()
-      .domain([0, 12000])
+      .domain([0, xMax])
       .range([0, width]);
-      bubble.append("g")
+    bubble.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([35, 90])
+      .domain([0, yMax])
       .range([height, 0]);
-      bubble.append("g")
+    bubble.append("g")
       .call(d3.axisLeft(y));
 
+    zMax = d3.max(data, function (d) {
+      return d.population;
+    });
+    zMin = d3.min(data, function (d) {
+      return d.population;
+    });
     // Add a scale for bubble size
     var z = d3.scaleLinear()
-      .domain([200000, 1310000000])
+      .domain([zMin, zMax])
       .range([4, 40]);
 
     // Add a scale for bubble color
@@ -302,20 +321,34 @@ $(document).ready(function () {
       .style("color", "white")
 
     // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-    var showTooltip = function (d) {
+    var tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+
+    // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+    var showTooltip = function (event,d) {
+      console.log(d.province);
       tooltip
         .transition()
         .duration(200)
       tooltip
         .style("opacity", 1)
-        .html("Province: " + d.province)
-        .style("left", (d3.mouse(this)[0] + 30) + "px")
-        .style("top", (d3.mouse(this)[1] + 30) + "px")
+        .html("Province: " + d.province + 
+              "<br>Health workers: " + d.workers +
+              "<br>Health sites: " + d.sites + 
+              "<br>Population: " + d.population)
+        .style("left", (event.pageX + 20) + "px")
+        .style("top", (event.pageY - 90) + "px")
     }
     var moveTooltip = function (d) {
       tooltip
-        .style("left", (d3.mouse(this)[0] + 30) + "px")
-        .style("top", (d3.mouse(this)[1] + 30) + "px")
+        .style("left", (event.pageX +20) + "px")
+        .style("top", (event.pageY - 90) + "px")
     }
     var hideTooltip = function (d) {
       tooltip
@@ -323,6 +356,7 @@ $(document).ready(function () {
         .duration(200)
         .style("opacity", 0)
     }
+
 
     // Add dots
     bubble.append('g')
