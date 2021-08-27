@@ -17,55 +17,127 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">DATA101</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <h3 class="navbar-brand">PHILIPPINE HEALTH DASHBOARD</h3>
     </div>
   </nav>
 
-  <div class="container">
-
-    <h1>Welcome to Data Visualization!</h1>
-    <p>Visualizing tabular data with D3.js (and colors) using Flask!</p>
-
-    <hr />
-
-    <span>Select a country:
-      <select id="countryselect">
-      </select>
-    </span>
-    <div id="chart">
+  <div class="position-absolute top-80 end-0 float-right" id="floating_stats">
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <h1 id="healthcare_workers_total">289,578</h1>
+      <p>Healthcare Workers</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <p style="font-size:small; font-weight:bold">Types of Healthcare Workers</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <h1 id="healthsites_total">8,234</h1>
+      <p>Health Sites</p>
+    </div>
+    <div class="row-fluid shadow-sm p-3 mb-3 bg-white rounded">
+      <p style="font-size:small; font-weight:bold">Health Sites Amenities</p>
     </div>
   </div>
 
-  <!-- Create a div where the graph will take place -->
-  <div id="my_dataviz"></div>
+  <div class="container-fluid" id="visualisations">
+    <div class="row h-75 shadow-sm p-3 mb-2 bg-white rounded" id="map">
+      INSERT MAP HERE
+      <div class="accordion" id="map_filter_options">
+        <div class="accordion-item">
+          <h5 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Map Filter: Number of Healthsites per Region
+            </button>
+          </h5>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="col" id="column_filter">
+                <div class="row" id="filter_header">
+                  Filter Healthcare Workers
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Healthcare Worker Type</label>
+                  <select class="form-select" id="select_healthcare_worker_type" aria-label="Default select example">
+                    <option value="" selected disabled>Select a worker type</option>
+                    <option value="">All</option>
+                    <option value="">Two</option>
+                    <option value="">Three</option>
+                  </select>
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Province</label>
+                  <select class="form-select" id="select_province" aria-label="Default select example">
+                    <option value="" selected disabled>Select a province</option>
+                    <option value="">All</option>
+                    <option value="">Two</option>
+                    <option value="">Three</option>
+                  </select>
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Region</label>
+                  <select class="form-select" id="select_region" aria-label="Default select example">
+                    <option value="" selected disabled>Select a region</option>
+                    <option value="">All</option>
+                    <option value="">Two</option>
+                    <option value="">Three</option>
+                  </select>
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Sector</label>
+                  <div class="form-check form-check-inline" style="margin-left: 6px">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radiobtn_public_sector" value="option1">
+                    <label class="form-check-label" for="radiobtn_public_sector">Public</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radiobtn_private_sector" value="option2">
+                    <label class="form-check-label" for="radiobtn_private_sector">Private</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radiobtn_both_sector" value="option3">
+                    <label class="form-check-label" for="radiobtn_both_sector">Both</label>
+                  </div>
+                </div>
+                <div class="row" id="filter_header">
+                  Filter Health Sites
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Amenities</label>
+                  <select class="form-select" id="select_amentity" aria-label="Default select example">
+                    <option value="" selected disabled>Select an amenity type</option>
+                    <option value="">All</option>
+                    <option value="">Two</option>
+                    <option value="">Three</option>
+                  </select>
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Location</label>
+                  <select class="form-select" id="select_location" aria-label="Default select example">
+                    <option value="" selected disabled>Select a location</option>
+                    <option value="">All</option>
+                    <option value="">Two</option>
+                    <option value="">Three</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!-- A bit of CSS: change stroke color of circle on hover (white -> black) -->
-  <style>
-      .bubbles {
-          stroke-width: 2px;
-          stroke: white;
-      }
-
-      .bubbles:hover {
-          stroke: black;
-      }
-  </style>
+    </div>
+    <div class="row h-25" id="second_row">
+      <div class="col col-7.5 shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_per_region">
+        <h6>Number of Healthsites per Region</h6>
+      </div>
+      <div class="col col-md-auto shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_vs_healthcare_workers_per_region">
+        <h6>Number of Healthsites vs Healthcare Workers per Region</h6>
+        <div id="my_dataviz"></div>
+      </div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="static/main.js"></script>
+  <script type="text/javascript" src="static/draggable_div.js"></script>
 </body>
 </html>
