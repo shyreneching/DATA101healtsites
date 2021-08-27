@@ -46,7 +46,7 @@ def get_bubble_data():
     df = pd.read_csv(actual_data_url)
 
     filtered_df = df[['Region', 'Province', 'Total - Grand Total', 'Total Amenities', 'Population']].copy()
-    filtered_df.columns - ['region', 'province', 'workers', 'sites', 'population']
+    filtered_df.columns = ['region', 'province', 'workers', 'sites', 'population']
 
     return Response(filtered_df.to_csv(), mimetype="text/csv")
 
