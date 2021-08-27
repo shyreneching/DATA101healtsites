@@ -171,8 +171,16 @@ $(document).ready(function () {
     .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
 
+
   //Read the data
-  d3.csv('/bubblechart', function (data) {
+  d3.csv('/bubblechart', function (raw_data) {
+    return {
+      workers: +raw_data.workers,
+      sites: +raw_data.sites,
+      population: +raw_data.population,
+      province: raw_data.province
+    };
+  }).then(function(data){
 
     // Add X axis
     var x = d3.scaleLinear()
