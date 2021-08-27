@@ -5,14 +5,24 @@
 
 html, body {
   height: 100%;
+  background-color: #EBDCDC;
 }
 
 body, text {
   font-family: 'Montserrat', sans-serif;
 }
 
-h1 {
-  margin-top: 1.25em;
+h4, h5, h6 {
+  color: #B17474;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.filter-label {
+  font-size: 12px;
 }
 
 .navbar {
@@ -33,22 +43,27 @@ h1 {
 
 .container-fluid {
   height: 100%;
+  background-color: #EBDCDC;
 }
 
 #map {
-  /* background-color: red; */
+  background-color: white;
+  margin: 10px 10px 0px 10px;
 }
 
 #second_row {
-  /* background-color: coral; */
+  /* background-color: white; */
+  margin: 0px 10px 10px 10px;
 }
 
 #num_healthsites_per_region {
-  /* background-color: cornflowerblue; */
+  background-color: white;
+  margin-right: 5px;
 }
 
 #num_healthsites_vs_healthcare_workers_per_region {
-  /* background-color: yellow; */
+  background-color: white;
+  margin-left: 5px;
 }
 
 #map_filter_options {
@@ -65,6 +80,7 @@ h1 {
 
 .accordion-button {
   font-size: 12px;
+  font-weight: bold;
   color: white;
 }
 
@@ -87,6 +103,7 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   color: white;
   font-size: 12px;
+  font-weight: bold;
   height: 40px;
   align-items: center;
   justify-content: center;
@@ -118,4 +135,22 @@ option, .form-select {
   width: 25%;
   margin-top: 5px;
   margin-bottom: 0px;
+}
+
+.row-fluid {
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #CE8888;
+  color: #CE8888;
+}
+
+#floating_stats {
+  width: 15%;
+  /* position: absolute; */
+  margin-right: 50px;
+  margin-top: 30px;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+  text-align: center
 }
