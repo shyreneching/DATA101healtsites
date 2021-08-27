@@ -172,7 +172,7 @@ $(document).ready(function () {
       "translate(" + margin.left + "," + margin.top + ")");
 
   //Read the data
-  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function (data) {
+  d3.csv('/data/Merged.csv', function (data) {
 
     // Add X axis
     var x = d3.scaleLinear()
@@ -196,7 +196,91 @@ $(document).ready(function () {
 
     // Add a scale for bubble color
     var myColor = d3.scaleOrdinal()
-      .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+      .domain(['BASILAN',
+        'LANAO DEL SUR',
+        'MAGUINDANAO',
+        'SULU',
+        'TAWI-TAWI',
+        'ABRA',
+        'APAYAO',
+        'BENGUET',
+        'IFUGAO',
+        'KALINGA',
+        'MOUNTAIN PROVINCE',
+        'MARINDUQUE',
+        'OCCIDENTAL MINDORO',
+        'ORIENTAL MINDORO',
+        'PALAWAN',
+        'ROMBLON',
+        'ILOCOS NORTE',
+        'ILOCOS SUR',
+        'LA UNION',
+        'PANGASINAN',
+        'BATANES',
+        'CAGAYAN',
+        'ISABELA',
+        'NUEVA VIZCAYA',
+        'QUIRINO',
+        'AURORA',
+        'BATAAN',
+        'BULACAN',
+        'NUEVA ECIJA',
+        'PAMPANGA',
+        'TARLAC',
+        'ZAMBALES',
+        'BATANGAS',
+        'CAVITE',
+        'LAGUNA',
+        'QUEZON',
+        'RIZAL',
+        'CITY OF ISABELA',
+        'ZAMBOANGA DEL NORTE',
+        'ZAMBOANGA DEL SUR',
+        'ZAMBOANGA SIBUGAY',
+        'ALBAY',
+        'CAMARINES NORTE',
+        'CAMARINES SUR',
+        'CATANDUANES',
+        'MASBATE',
+        'SORSOGON',
+        'AKLAN',
+        'ANTIQUE',
+        'CAPIZ',
+        'GUIMARAS',
+        'ILOILO',
+        'NEGROS OCCIDENTAL',
+        'BOHOL',
+        'CEBU',
+        'NEGROS ORIENTAL',
+        'SIQUIJOR',
+        'BILIRAN',
+        'EASTERN SAMAR',
+        'LEYTE',
+        'NORTHERN SAMAR',
+        'SAMAR',
+        'SOUTHERN LEYTE',
+        'BUKIDNON',
+        'CAMIGUIN',
+        'LANAO DEL NORTE',
+        'MISAMIS OCCIDENTAL',
+        'MISAMIS ORIENTAL',
+        'COMPOSTELA VALLEY',
+        'DAVAO DEL NORTE',
+        'DAVAO DEL SUR',
+        'DAVAO OCCIDENTAL',
+        'DAVAO ORIENTAL',
+        'NORTH COTABATO',
+        'COTABATO CITY',
+        'SARANGANI',
+        'SOUTH COTABATO',
+        'SULTAN KUDARAT',
+        'AGUSAN DEL NORTE',
+        'AGUSAN DEL SUR',
+        'DINAGAT ISLANDS',
+        'SURIGAO DEL NORTE',
+        'SURIGAO DEL SUR',
+        'METROPOLITAN MANILA'
+      ])
       .range(d3.schemeSet2);
 
     // -1- Create a tooltip div that is hidden by default:
@@ -216,7 +300,7 @@ $(document).ready(function () {
         .duration(200)
       tooltip
         .style("opacity", 1)
-        .html("Country: " + d.country)
+        .html("Province: " + d.province)
         .style("left", (d3.mouse(this)[0] + 30) + "px")
         .style("top", (d3.mouse(this)[1] + 30) + "px")
     }
@@ -241,17 +325,17 @@ $(document).ready(function () {
       .attr("class", "bubbles")
       .attr("cx", function (d) {
         // Total Health worker
-        return x(d.gdpPercap);
+        return x(d.workers);
       })
       .attr("cy", function (d) {
         // Total Ameneties
-        return y(d.lifeExp);
+        return y(d.sites);
       })
       .attr("r", function (d) {
-        return z(d.Population);
+        return z(d.population);
       })
       .style("fill", function (d) {
-        return myColor(d.Province);
+        return myColor(d.province);
       })
       // -3- Trigger the functions
       .on("mouseover", showTooltip)
