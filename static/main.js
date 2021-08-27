@@ -21,7 +21,7 @@ $(document).ready(function () {
 
   // var url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv";
 
-  d3.json('/data/food_consumption.csv').then(function (formatted_data) {
+  d3.json('/data').then(function (formatted_data) {
     categories = [...new Set(formatted_data.map(function (d) {
       return d.category;
     }))];
@@ -172,7 +172,7 @@ $(document).ready(function () {
       "translate(" + margin.left + "," + margin.top + ")");
 
   //Read the data
-  d3.csv('/data/Merged.csv', function (data) {
+  d3.csv('/bubblechart', function (data) {
 
     // Add X axis
     var x = d3.scaleLinear()
