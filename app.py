@@ -72,9 +72,9 @@ def about():
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/bubblemyles')
-def get_bubble_myles():
-    return app.send_static_file('bubble_myles.html')
+@app.route('/bubble')
+def get_bubble():
+    return app.send_static_file('bubble.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
