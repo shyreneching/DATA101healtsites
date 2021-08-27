@@ -48,7 +48,7 @@ def get_bubble_data():
     filtered_df = df[['Region', 'Province', 'Total - Grand Total', 'Total Amenities', 'Population']].copy()
     filtered_df.columns = ['region', 'province', 'workers', 'sites', 'population']
 
-    return Response(filtered_df.to_csv(), mimetype="text/csv")
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
 
 # STATIC PAGES
