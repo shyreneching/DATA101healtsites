@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    const width = 450,
-        height = 450,
-        margin = 40;
+    const width = 200,
+        height = 200,
+        margin = 10;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
 
     // append the svg object to the div called 'my_dataviz'
-    const svg = d3.select("#bar")
+    const svg = d3.select("#pie_healthsitesamenities")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -97,7 +97,7 @@ $(document).ready(function () {
             .data(pie(data_ready))
             .enter()
             .append('path')
-            .attr('d', arc)
+            
             .attr('fill', function (d, i) {
                 return color(d.data.label);
             });
