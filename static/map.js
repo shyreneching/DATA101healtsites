@@ -53,10 +53,10 @@ map.on('load', () => {
 
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const description = e.features[0].properties.name + 
+        const description =  titleCase(e.features[0].properties.name) + 
                             "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
-                            "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
-                            "<br>Province:" + e.features[0].properties.NAME_1;
+                            // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
+                            "<br>Province: " + e.features[0].properties.province;
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
