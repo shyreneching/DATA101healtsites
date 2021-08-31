@@ -3,22 +3,26 @@
   --red-light: #DBA9A9 !important:
 } */
 
-html, body {
+html,
+body {
   height: 100%;
   background-color: #EBDCDC;
 }
 
-body, text {
+body,
+text {
   font-family: 'Montserrat', sans-serif;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   color: #B17474;
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .btn {
@@ -49,6 +53,7 @@ p {
   text-align: center;
   width: 100%;
 }
+
 .navbar-brand {
   float: none;
   color: white;
@@ -87,7 +92,12 @@ p {
   z-index: 99;
 }
 
-.accordion-item, .accordion-button, .accordion-header, .accordion-collapse, .collapse, .show {
+.accordion-item,
+.accordion-button,
+.accordion-header,
+.accordion-collapse,
+.collapse,
+.show {
   background-color: #B17474 !important;
   color: white !important;
 }
@@ -139,18 +149,19 @@ p {
   border-bottom: 0.2px solid #DBA9A9;
 }
 
-option, .form-select {
+option,
+.form-select {
   font-size: 12px;
   color: #B17474;
 }
 
 .bubbles {
-    stroke-width: 2px;
-    stroke: white;
+  stroke-width: 2px;
+  stroke: white;
 }
 
 .bubbles:hover {
-    stroke: black;
+  stroke: black;
 }
 
 .form-check-inline {
@@ -175,4 +186,9 @@ option, .form-select {
   justify-content: center;
   align-items: center;
   text-align: center
+}
+
+.mapboxgl-popup {
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
