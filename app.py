@@ -89,6 +89,32 @@ def get_pie_workers_data():
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
 
+@app.route('/numworkers')
+def get_number_workers():
+    df = pd.read_csv(actual_data_url)
+
+    filtered_df = df[['Total - Dentist', 'Total - Doctor - Clinical', 'Total - Medical Technologist', 'Total - Midwife','Total - Nurse', 'Total - Nutritionist or Dietician','Total - Occupational Therapist','Total - Pharmacist','Total - Physical Therapist','Total - Radiologic Technologist','Total - X-ray Technologist']].copy()
+    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologists', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
+
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[[-1]]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numworkers.csv"})
+
+@app.route('/numsites')
+def get_number_sites():
+    df = pd.read_csv(actual_data_url)
+
+    filtered_df = df[['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']].copy()
+    filtered_df.columns = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
+
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[[-1]]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numsites.csv"})
+
 # STATIC PAGES
 # @app.route('/about')
 # def about():
