@@ -136,5 +136,9 @@ def get_pie_sites():
 def get_pie_workers():
     return app.send_static_file('pieworkers.html')
 
+@app.route('/hierarchical')
+def get_hierarchical_bar():
+    return app.send_static_file('hierarchical.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
