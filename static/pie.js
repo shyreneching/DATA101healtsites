@@ -7,8 +7,8 @@ $(document).ready(function () {
     // FOR PIE CHART SITES //
     /////////////////////////
   
-    const pie_width = 800;
-    const pie_height = 600;
+    const pie_width = 200;
+    const pie_height = 200;
     const radius = Math.min(pie_width, pie_height) / 2;
 
     var colorScale, inFlag = false;

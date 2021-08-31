@@ -11,8 +11,7 @@ var map = new mapboxgl.Map({
     center: [120.99, 12.56], // starting position [lng, lat]
     zoom: 4.7, // starting zoom,
     minZoom: 4.7,
-    maxZoom: 13,
-    // maxBounds: bounds
+    maxZoom: 13
 });
 
 map.on('load', () => {
