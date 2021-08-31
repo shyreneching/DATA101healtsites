@@ -81,6 +81,6 @@ $(document).ready(function () {
         .style("opacity", 1)
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
-        // .on("mouseleave", hideTooltip)
+        .on("mouseleave", hideTooltip)
     });
   });
