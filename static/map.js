@@ -1,12 +1,18 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpa2EtY2hhbiIsImEiOiJja3J1YjE5NXMxMDA2Mm9tZmsyMjZpcjJ5In0.NvcmxedWpkjDDHd315UDRg';
 
+const bounds = [
+    [126.162894, 19.758438], // Southwest coordinates
+    [116.820957, 4.267536] // Northeast coordinates
+    ];
+
 var map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/erika-chan/ckszvg5py745v17qudxf0fs8e', // style URL
     center: [120.99, 12.56], // starting position [lng, lat]
     zoom: 4.7, // starting zoom,
     minZoom: 4.7,
-    maxZoom: 13
+    maxZoom: 13,
+    // maxBounds: bounds
 });
 
 map.on('load', () => {
@@ -30,9 +36,9 @@ map.on('load', () => {
                 ]
             },
                 
-            'circle-color': '#fbb03b',
+            'circle-color': '#D2285B',
             'circle-stroke-width': 1,
-            'circle-stroke-color': '#777777'
+            'circle-stroke-color': '#5C0218'
         },
     });
 
