@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
     center: [120.99, 12.56], // starting position [lng, lat]
     zoom: 4.7, // starting zoom,
     minZoom: 4.7,
-    maxZoom: 13,
+    maxZoom: 18,
     maxBounds: bounds
 });
 
@@ -53,7 +53,7 @@ map.on('load', () => {
         console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const description =  titleCase(e.features[0].properties.name) + 
+        const description =  titleCase(e.features[0].properties.name) +
                             "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
                             // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
                             "<br>Province: " + e.features[0].properties.province;
@@ -80,10 +80,10 @@ map.on('load', () => {
         for (var i = 0; i < splitStr.length; i++) {
             // You do not need to check if i is larger than splitStr length, as your for does that for you
             // Assign it back to the array
-            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         // Directly return the joined string
-        return splitStr.join(' '); 
+        return splitStr.join(' ');
      }
 
      function long_desc(data) {
