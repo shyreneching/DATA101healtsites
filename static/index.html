@@ -68,27 +68,6 @@
                   <label class="filter-label">Healthcare Worker Type</label>
                   <select class="form-select" id="select_healthcare_worker_type" aria-label="Default select example">
                     <option value="" selected disabled>Select a worker type</option>
-                    <option value="">All</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
-                  </select>
-                </div>
-                <div class="row" id="filter_item">
-                  <label class="filter-label">Province</label>
-                  <select class="form-select" id="select_province" aria-label="Default select example">
-                    <option value="" selected disabled>Select a province</option>
-                    <option value="">All</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
-                  </select>
-                </div>
-                <div class="row" id="filter_item">
-                  <label class="filter-label">Region</label>
-                  <select class="form-select" id="select_region" aria-label="Default select example">
-                    <option value="" selected disabled>Select a region</option>
-                    <option value="">All</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
                   </select>
                 </div>
                 <div class="row" id="filter_item">
@@ -118,13 +97,19 @@
                     <option value="">Three</option>
                   </select>
                 </div>
+                <div class="row" id="filter_header">
+                  Filter Location
+                </div>
                 <div class="row" id="filter_item">
-                  <label class="filter-label">Location</label>
-                  <select class="form-select" id="select_location" aria-label="Default select example">
-                    <option value="" selected disabled>Select a location</option>
-                    <option value="">All</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
+                  <label class="filter-label">Province</label>
+                  <select class="form-select" id="select_province" aria-label="Default select example">
+                    <option value="" selected disabled>Select a province</option>
+                  </select>
+                </div>
+                <div class="row" id="filter_item">
+                  <label class="filter-label">Region</label>
+                  <select class="form-select" id="select_region" aria-label="Default select example">
+                    <option value="" selected disabled>Select a region</option>
                   </select>
                 </div>
               </div>
@@ -138,7 +123,7 @@
 
       <div class="col col-7.5 shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_per_region">
         <h6>Number of Healthsites per Region</h6>
-        
+
         <div id="bar"></div>
       </div>
       <div class="col col-md-auto shadow-sm p-3 mb-5 bg-white rounded" id="num_healthsites_vs_healthcare_workers_per_region">
@@ -162,5 +147,6 @@
   <!-- <script type="text/javascript" src="static/draggable_div.js"></script> -->
   <script type="text/javascript" src="static/map.js"></script>
   <script type="text/javascript" src="static/bubble.js"></script>
+  <script type="text/javascript" src="static/filter.js"></script>
 </body>
 </html>
