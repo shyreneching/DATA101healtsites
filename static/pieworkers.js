@@ -14,21 +14,21 @@ $(document).ready(function () {
     var colorScale, inFlag = false;
   
     // Creates sources <svg> element
-    var pie_sites = d3.select("#pie_sites")
+    var pie_sites = d3.select("#pie_typesofhealthworkers")
       .append("svg")
       .attr("width", pie_width)
       .attr("height", pie_height)
       .append("g")
       .attr("transform", `translate(${pie_width / 2}, ${pie_height / 2})`);
   
-    d3.csv('/piesitesdata').then(function (data) {
+    d3.csv('/pieworkersdata').then(function (data) {
 
       inFlag = false
 
       keys = [...new Set(data.map(function(d) { return d[""]; }))];  
       colorScale = d3.scaleOrdinal(keys, d3.schemeCategory10);
   
-      var tooltip = d3.select("#pie_sites")
+      var tooltip = d3.select("#pie_typesofhealthworkers")
         .append("div")
         .style("display", "none")
         .style("opacity", 0)

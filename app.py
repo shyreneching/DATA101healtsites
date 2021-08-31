@@ -63,7 +63,7 @@ def get_bubble_region(region):
 
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
-@app.route('/piedata')
+@app.route('/piesitesdata')
 def get_pie_sites_data():
     df = pd.read_csv(actual_data_url)
 
@@ -74,7 +74,20 @@ def get_pie_sites_data():
     filtered_df=filtered_df.iloc[-1]
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
-    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
+
+@app.route('/pieworkersdata')
+def get_pie_workers_data():
+    df = pd.read_csv(actual_data_url)
+
+    filtered_df = df[['Total - Dentist', 'Total - Doctor - Clinical', 'Total - Medical Technologist', 'Total - Midwife','Total - Nurse', 'Total - Nutritionist or Dietician','Total - Occupational Therapist','Total - Pharmacist','Total - Physical Therapist','Total - Radiologic Technologist','Total - X-ray Technologist']].copy()
+    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologists', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
+
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[-1]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
 
 # STATIC PAGES
 # @app.route('/about')
@@ -89,9 +102,13 @@ def index():
 def get_bubble():
     return app.send_static_file('bubble.html')
 
-@app.route('/pie')
-def get_pie():
-    return app.send_static_file('pie.html')
+@app.route('/piesites')
+def get_pie_sites():
+    return app.send_static_file('piesites.html')
+
+@app.route('/pieworkers')
+def get_pie_workers():
+    return app.send_static_file('pieworkers.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
