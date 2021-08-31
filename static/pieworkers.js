@@ -46,13 +46,13 @@ $(document).ready(function () {
               .html("<h6>" + d.data[""].toUpperCase() + 
                   "</h6>Total Count: " + numberWithCommas(d.data["total"]))
               .style("right", (window.innerWidth - event.pageX - 100) + "px")
-              .style("top", (event.pageY - 190) + "px")
+              .style("top", (event.pageY - 200) + "px")
       }
       var moveTooltip = function (event, d) {
           if(inFlag){
               tooltip
                   .style("right", (window.innerWidth - event.pageX - 100) + "px")
-                  .style("top", (event.pageY - 190) + "px")
+                  .style("top", (event.pageY - 200) + "px")
           } else {
               showTooltip(event, d)
           }
