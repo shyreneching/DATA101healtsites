@@ -4,6 +4,8 @@ $(document).ready(function() {
   var regionSelect = document.getElementById("select_region");
   var amenitiesSelect = document.getElementById("select_amentity");
 
+  var bothRadioBtn = document.getElementById("radiobtn_both_sector");
+
   var healthworkersList = ['ALL', 'DENTIST', 'DOCTOR', 'MEDICAL TECHNOLOGIST', 'MIDWIFE', 'NURSE', 'NUTRITIONIST/DIETICIAN', 'OCCUPATIONAL THERAPIST', 'PHARMACIST', 'PHYSICAL THERAPIST', 'RADIOLOGIC TECHNOLOGIST', 'X-RAY TECHNOLOGIST'];
 
   var provincesList = ['ALL', 'BASILAN',
@@ -140,4 +142,6 @@ $(document).ready(function() {
    option.text = amenitiesList[i];
    amenitiesSelect.appendChild(option);
  };
+
+
 });
