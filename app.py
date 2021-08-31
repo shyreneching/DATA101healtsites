@@ -67,7 +67,7 @@ def get_bubble_region(region):
 def get_pie_sites_data():
     df = pd.read_csv(actual_data_url)
 
-    filtered_df = df[['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social_facility', 'Total Amenities']].copy()
+    filtered_df = df[['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social facility', 'Total Amenities']].copy()
     filtered_df.columns = ['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social_facility', 'Total Amenities']
 
     filtered_df=filtered_df.append(filtered_df.sum().rename('Total'))

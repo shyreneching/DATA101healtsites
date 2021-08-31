@@ -13,7 +13,7 @@ $(document).ready(function () {
       .attr("width", pie_width)
       .attr("height", pie_height);
   
-    d3.csv('/pie', function (data) {
+    d3.csv('/pie', function (raw_data) {
       const g = pie_sites.append("g")
         .attr("transform", `translate(${pie_width / 2}, ${pie_height / 2})`);
   
