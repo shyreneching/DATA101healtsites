@@ -63,17 +63,18 @@ def get_bubble_region(region):
 
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
-@app.route('/pie')
+@app.route('/piedata')
 def get_pie_sites_data():
     df = pd.read_csv(actual_data_url)
 
-    filtered_df = df[['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social facility', 'Total Amenities']].copy()
-    filtered_df.columns = ['Region', 'Province', 'clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','others','pharmacy','social_facility', 'Total Amenities']
+    filtered_df = df[['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']].copy()
+    filtered_df.columns = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
 
-    filtered_df=filtered_df.append(filtered_df.sum().rename('Total'))
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[-1]
 
-    return Response(filtered_df.to_csv(), mimetype="text/csv")
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=bubble.csv"})
 
 # STATIC PAGES
 # @app.route('/about')
@@ -84,9 +85,9 @@ def get_pie_sites_data():
 def index():
     return app.send_static_file('index.html')
 
-# @app.route('/bubble')
-# def get_bubble():
-#     return app.send_static_file('bubble.html')
+@app.route('/bubble')
+def get_bubble():
+    return app.send_static_file('bubble.html')
 
 @app.route('/pie')
 def get_pie():
