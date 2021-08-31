@@ -45,14 +45,14 @@ $(document).ready(function () {
               .style("opacity", 1)
               .html("<h6>" + d.data[""].toUpperCase() + 
                   "</h6>Total Count: " + numberWithCommas(d.data["total"]))
-              .style("left", (event.pageX - 100) + "px")
-              .style("top", (event.pageY - 130) + "px")
+              .style("right", (window.innerWidth - event.pageX - 100) + "px")
+              .style("top", (event.pageY - 190) + "px")
       }
       var moveTooltip = function (event, d) {
           if(inFlag){
               tooltip
-                  .style("left", (event.pageX - 100) + "px")
-                  .style("top", (event.pageY - 130) + "px")
+                  .style("right", (window.innerWidth - event.pageX - 100) + "px")
+                  .style("top", (event.pageY - 190) + "px")
           } else {
               showTooltip(event, d)
           }
@@ -81,6 +81,6 @@ $(document).ready(function () {
         .style("opacity", 1)
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
-        .on("mouseleave", hideTooltip)
+        // .on("mouseleave", hideTooltip)
     });
   });
