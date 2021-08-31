@@ -50,7 +50,7 @@ map.on('load', () => {
     map.on('mouseenter', 'healthsites', (e) => {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
-
+        console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
         const description =  titleCase(e.features[0].properties.name) + 
@@ -84,6 +84,57 @@ map.on('load', () => {
         }
         // Directly return the joined string
         return splitStr.join(' '); 
+     }
+
+     function long_desc(data) {
+        var desc = "";
+
+        if(e.features[0].properties.opening_hours != ""){
+            desc = desc + "<br>Opening Hours: " + e.features[0].properties.opening_hours;
+        }
+        if(e.features[0].properties.is_in_health_zone != ""){
+            desc = desc + "<br>In Health Zone: " + e.features[0].properties.is_in_health_zone;
+        }
+        if(e.features[0].properties.water_source != ""){
+            desc = desc + "<br>Water Source: " + e.features[0].properties.water_source;
+        }
+        if(e.features[0].properties.insurance != ""){
+
+        }
+        if(e.features[0].properties.staff_doctors != ""){
+
+        }
+        if(e.features[0].properties.contact_number != ""){
+
+        }
+        if(e.features[0].properties.electricity != ""){
+
+        }
+       
+        if(e.features[0].properties.operational_status != ""){
+
+        }
+        if(e.features[0].properties.is_in_health_area != ""){
+
+        }
+        if(e.features[0].properties.health_amenity_type != ""){
+
+        }
+        if(e.features[0].properties.emergency != ""){
+
+        }
+        if(e.features[0].properties.staff_nurses != ""){
+
+        }
+        if(e.features[0].properties.wheelchair != ""){
+
+        }
+        if(e.features[0].properties.beds != ""){
+
+        }
+
+
+        return desc;
      }
 
 });
