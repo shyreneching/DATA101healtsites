@@ -16,7 +16,7 @@ $(document).ready(function(){
         .attr("height", height)
 
     var moveToProvince = function(event, d){
-        d3.selectAll(".tooltip").remove();
+        d3.selectAll(".tooltip-bubble").remove();
         $("#regionname").text(d["region"])
         $("#bBack").css("display", "")
 
@@ -57,12 +57,12 @@ $(document).ready(function(){
     
     
             // Add X axis
-            bubble.selectAll(".xAxis")
+            bubble.selectAll(".xAxis-bubble")
                 .transition(t)
                 .call(d3.axisBottom(xScale));
     
             // Add Y axis
-            bubble.selectAll(".yAxis")
+            bubble.selectAll(".yAxis-bubble")
                 .transition(t)
                 .call(d3.axisLeft(yScale));
     
@@ -71,7 +71,7 @@ $(document).ready(function(){
                 .append("div")
                 .style("display", "none")
                 .style("opacity", 0)
-                .attr("class", "tooltip")
+                .attr("class", "tooltip tooltip-bubble")
                 .style("background-color", "black")
                 .style("border-radius", "5px")
                 .style("padding", "10px")
@@ -153,7 +153,7 @@ $(document).ready(function(){
     }
 
     $("#bBack").click(function(){
-        d3.selectAll(".tooltip").remove();
+        d3.selectAll(".tooltip-bubble").remove();
         $("#regionname").text("")
         $("#bBack").css("display", "none")
 
@@ -194,12 +194,12 @@ $(document).ready(function(){
     
     
             // Add X axis
-            bubble.selectAll(".xAxis")
+            bubble.selectAll(".xAxis-bubble")
                 .transition(t)
                 .call(d3.axisBottom(xScale));
     
             // Add Y axis
-            bubble.selectAll(".yAxis")
+            bubble.selectAll(".yAxis-bubble")
                 .transition(t)
                 .call(d3.axisLeft(yScale));
     
@@ -208,7 +208,7 @@ $(document).ready(function(){
                 .append("div")
                 .style("display", "none")
                 .style("opacity", 0)
-                .attr("class", "tooltip")
+                .attr("class", "tooltip tooltip-bubble")
                 .style("background-color", "black")
                 .style("border-radius", "5px")
                 .style("padding", "10px")
@@ -325,13 +325,13 @@ $(document).ready(function(){
 
         // Add X axis
         bubble.append("g")
-            .attr("class", "xAxis")
+            .attr("class", "xAxis-bubble")
             .attr("transform", "translate(0," + (height - margin.bottom) + ")")
             .call(d3.axisBottom(xScale));
 
         // Add Y axis
         bubble.append("g")
-            .attr("class", "yAxis")
+            .attr("class", "yAxis-bubble")
             .attr("transform", "translate(" + margin.left + ",0)")
             .call(d3.axisLeft(yScale));
 
@@ -353,7 +353,7 @@ $(document).ready(function(){
             .append("div")
             .style("display", "none")
             .style("opacity", 0)
-            .attr("class", "tooltip")
+            .attr("class", "tooltip tooltip-bubble")
             .style("background-color", "black")
             .style("border-radius", "5px")
             .style("padding", "10px")
