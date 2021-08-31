@@ -6,7 +6,7 @@ var map = new mapboxgl.Map({
     center: [120.99, 12.56], // starting position [lng, lat]
     zoom: 4.7, // starting zoom,
     minZoom: 4.7,
-    maxZoom: 13
+    maxZoom: 20
 });
 
 map.on('load', () => {
@@ -29,10 +29,10 @@ map.on('load', () => {
                     [22, 180]
                 ]
             },
-                
-            'circle-color': '#fbb03b',
+
+            'circle-color': '#D2285B',
             'circle-stroke-width': 1,
-            'circle-stroke-color': '#777777'
+            'circle-stroke-color': '#5C0218'
         },
     });
 
