@@ -3,43 +3,43 @@ import pandas as pd
 
 app = Flask(__name__)
 
-data_url = 'data/food_consumption.csv'
+# data_url = 'data/food_consumption.csv'
 actual_data_url = 'data/Merged.csv'
 
 # DATA ENDPOINTS
-@app.route('/countries')
-def get_countries():
-    ## TODO: Get the countries and return as a list or JSON to the JS file
-    df = pd.read_csv(data_url)
-    df.columns = ['country', 'category', 'consumption', 'co2']
+# @app.route('/countries')
+# def get_countries():
+#     ## TODO: Get the countries and return as a list or JSON to the JS file
+#     df = pd.read_csv(data_url)
+#     df.columns = ['country', 'category', 'consumption', 'co2']
 
-    countries = df.country.unique()
+#     countries = df.country.unique()
 
-    # [{"value": "Philippines", "label": "Philippines"}, ...]
-    country_dict = pd.DataFrame(list(zip(countries, countries)),
-        columns=['value', 'label']).to_json(orient="records")
+#     # [{"value": "Philippines", "label": "Philippines"}, ...]
+#     country_dict = pd.DataFrame(list(zip(countries, countries)),
+#         columns=['value', 'label']).to_json(orient="records")
 
-    return Response(country_dict, mimetype="application/json")
+#     return Response(country_dict, mimetype="application/json")
 
 
-@app.route('/data')
-def get_data():
-    data = pd.read_csv(data_url)
-    data.columns = ['country', 'category', 'consumption', 'co2']
+# @app.route('/data')
+# def get_data():
+#     data = pd.read_csv(data_url)
+#     data.columns = ['country', 'category', 'consumption', 'co2']
 
-    data_json = data.to_json(orient="records")
-    return Response(data_json, mimetype="application/json")
+#     data_json = data.to_json(orient="records")
+#     return Response(data_json, mimetype="application/json")
 
-@app.route('/data/<country>')
-def get_country_data(country):
-    ## TODO: Get the data filtered by the provided country in the argument
-    df = pd.read_csv(data_url)
-    df.columns = ['country', 'category', 'consumption', 'co2']
+# @app.route('/data/<country>')
+# def get_country_data(country):
+#     ## TODO: Get the data filtered by the provided country in the argument
+#     df = pd.read_csv(data_url)
+#     df.columns = ['country', 'category', 'consumption', 'co2']
     
-    filtered_df = df[df['country'] == country].to_json(orient="records")
+#     filtered_df = df[df['country'] == country].to_json(orient="records")
 
 
-    return Response(filtered_df, mimetype="application/json")
+#     return Response(filtered_df, mimetype="application/json")
 
 @app.route('/bubblechart')
 def get_bubble_data():
@@ -76,17 +76,17 @@ def get_pie_sites_data():
     return Response(filtered_df.to_csv(), mimetype="text/csv")
 
 # STATIC PAGES
-@app.route('/about')
-def about():
-    return app.send_static_file('about.html')
+# @app.route('/about')
+# def about():
+#     return app.send_static_file('about.html')
 
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/bubble')
-def get_bubble():
-    return app.send_static_file('bubble.html')
+# @app.route('/bubble')
+# def get_bubble():
+#     return app.send_static_file('bubble.html')
 
 @app.route('/pie')
 def get_pie():
