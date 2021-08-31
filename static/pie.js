@@ -1,3 +1,7 @@
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(document).ready(function () {
     /////////////////////////
     // FOR PIE CHART SITES //
@@ -40,7 +44,7 @@ $(document).ready(function () {
               .style("display", "")
               .style("opacity", 1)
               .html("<h6>" + d.data[""].toUpperCase() + 
-                  "</h6>Total Count: " + d.data["total"])
+                  "</h6>Total Count: " + numberWithCommas(d.data["total"]))
               .style("left", (event.pageX - 100) + "px")
               .style("top", (event.pageY - 130) + "px")
       }

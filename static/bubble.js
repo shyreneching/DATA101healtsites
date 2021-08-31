@@ -1,3 +1,7 @@
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(document).ready(function(){
     var margin = {
         top: 10,
@@ -84,9 +88,9 @@ $(document).ready(function(){
                     .style("display", "")
                     .style("opacity", 1)
                     .html("<h6>" + d.region + 
-                        "</h6>Health workers: " + d.workers +
-                        "<br>Health sites: " + d.sites + 
-                        "<br>Population: " + d.population)
+                        "</h6>Health workers: " + numberWithCommas(d.workers) +
+                        "<br>Health sites: " + numberWithCommas(d.sites) + 
+                        "<br>Population: " + numberWithCommas(d.population))
                     .style("left", (event.pageX - 100) + "px")
                     .style("top", (event.pageY - 130) + "px")
             }
@@ -221,9 +225,9 @@ $(document).ready(function(){
                     .style("display", "")
                     .style("opacity", 1)
                     .html("<h6>" + d.region + 
-                        "</h6>Health workers: " + d.workers +
-                        "<br>Health sites: " + d.sites + 
-                        "<br>Population: " + d.population)
+                        "</h6>Health workers: " + numberWithCommas(d.workers) +
+                        "<br>Health sites: " + numberWithCommas(d.sites) + 
+                        "<br>Population: " + numberWithCommas(d.population))
                     .style("left", (event.pageX - 100) + "px")
                     .style("top", (event.pageY - 130) + "px")
             }
@@ -366,9 +370,9 @@ $(document).ready(function(){
                 .style("display", "")
                 .style("opacity", 1)
                 .html("<h6>" + d.region + 
-                    "</h6>Health workers: " + d.workers +
-                    "<br>Health sites: " + d.sites + 
-                    "<br>Population: " + d.population)
+                    "</h6>Health workers: " + numberWithCommas(d.workers) +
+                    "<br>Health sites: " + numberWithCommas(d.sites) + 
+                    "<br>Population: " + numberWithCommas(d.population))
                 .style("left", (event.pageX - 100) + "px")
                 .style("top", (event.pageY - 130) + "px")
         }
