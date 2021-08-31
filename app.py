@@ -88,5 +88,9 @@ def index():
 def get_bubble():
     return app.send_static_file('bubble.html')
 
+@app.route('/pie')
+def get_pie():
+    return app.send_static_file('pie.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
