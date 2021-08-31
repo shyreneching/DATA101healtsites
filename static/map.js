@@ -12,8 +12,29 @@ var map = new mapboxgl.Map({
 map.on('load', () => {
     //put things here
 
-    map.addSource('makati', {
+    map.addSource('sites', {
         type: 'geojson',
-        data: 'data/healthsites.geojson'
+        data: 'https://raw.githubusercontent.com/shyreneching/DATA101healtsites/main/data/healthsites.geojson'
     });
+
+    map.addLayer({
+        id: 'healthsites',
+        type: 'circle',
+        source: 'sites',
+        paint: {
+            'circle-radius': {
+                'base': 1.75,
+                'stops': [
+                    [12, 2],
+                    [22, 180]
+                ]
+            },
+                
+            'circle-color': '#fbb03b',
+            'circle-stroke-width': 1,
+            'circle-stroke-color': '#777777'
+        },
+    });
+
+
 });
