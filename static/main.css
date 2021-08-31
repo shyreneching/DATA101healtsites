@@ -191,4 +191,7 @@ option,
 .mapboxgl-popup {
   max-width: 400px;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background-color: "black";
+  border-radius: "5px";
+  color: "white";
 }
