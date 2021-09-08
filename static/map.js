@@ -50,13 +50,20 @@ map.on('load', () => {
     map.on('mouseenter', 'healthsites', (e) => {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
-        console.log(e.features[0].properties)
+        // console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const description =  titleCase(e.features[0].properties.name) +
+        var description =  "<b>"+titleCase(e.features[0].properties.name) + "</b>"+
                             "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
                             // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
-                            "<br>Province: " + e.features[0].properties.province;
+                            "<br>Region: " + e.features[0].properties.Region +
+                            "<br>Province: " + e.features[0].properties.province +
+                            long_desc(e);
+
+        if (description.substring(0,4) == "<b><"){
+            description = description.replace("<b></b>", "");
+            description = description.substring(4);
+        }
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -86,53 +93,61 @@ map.on('load', () => {
         return splitStr.join(' ');
      }
 
-     function long_desc(data) {
+     function long_desc(e) {
         var desc = "";
+
 
         if(e.features[0].properties.opening_hours != ""){
             desc = desc + "<br>Opening Hours: " + e.features[0].properties.opening_hours;
         }
-        if(e.features[0].properties.is_in_health_zone != ""){
-            desc = desc + "<br>In Health Zone: " + e.features[0].properties.is_in_health_zone;
+        if(e.features[0].properties.contact_number != ""){
+            desc = desc + "<br>Contact Number: " + e.features[0].properties.contact_number;
+        }
+        if(e.features[0].properties.health_amenity_type != ""){
+            desc = desc + "<br>Health Amenity Type: " + e.features[0].properties.health_amenity_type;
+        }
+        if(e.features[0].properties.operational_status != ""){
+            desc = desc + "<br>Operational Status: " + e.features[0].properties.operational_status;
+        }
+        if(e.features[0].properties.staff_doctors != ""){
+            desc = desc + "<br>Staff Doctors: " + e.features[0].properties.staff_doctors;
+        }
+        if(e.features[0].properties.staff_nurses != ""){
+            desc = desc + "<br>Staff Nurses: " + e.features[0].properties.staff_nurses;
+        }
+        if(e.features[0].properties.wheelchair != ""){
+            desc = desc + "<br>Wheelchair: " + e.features[0].properties.wheelchair;
+        }
+        if(e.features[0].properties.beds != ""){
+            desc = desc + "<br>Bed: " + e.features[0].properties.beds;
+        }
+        if(e.features[0].properties.electricity != ""){
+            desc = desc + "<br>Electricity: " + e.features[0].properties.electricity;
         }
         if(e.features[0].properties.water_source != ""){
             desc = desc + "<br>Water Source: " + e.features[0].properties.water_source;
         }
-        if(e.features[0].properties.insurance != ""){
-
+        if(e.features[0].properties.emergency != ""){
+            var add = e.features[0].properties.emergency;
+            add.replace(0, "No");
+            add.replace(1, "Yes");
+            desc = desc + "<br>Emergency: " + add;
         }
-        if(e.features[0].properties.staff_doctors != ""){
-
-        }
-        if(e.features[0].properties.contact_number != ""){
-
-        }
-        if(e.features[0].properties.electricity != ""){
-
-        }
-       
-        if(e.features[0].properties.operational_status != ""){
-
+        if(e.features[0].properties.is_in_health_zone != ""){
+            var add = e.features[0].properties.is_in_health_zone;
+            add.replace(0, "No");
+            add.replace(1, "Yes");
+            desc = desc + "<br>In Health Zone: " + add;
         }
         if(e.features[0].properties.is_in_health_area != ""){
-
+            var add = e.features[0].properties.is_in_health_area;
+            add.replace(0, "No");
+            add.replace(1, "Yes");
+            desc = desc + "<br>In Health Area: " + add;
+        }        
+        if(e.features[0].properties.insurance != ""){
+            desc = desc + "<br>Insurance: " + e.features[0].properties.insurance;
         }
-        if(e.features[0].properties.health_amenity_type != ""){
-
-        }
-        if(e.features[0].properties.emergency != ""){
-
-        }
-        if(e.features[0].properties.staff_nurses != ""){
-
-        }
-        if(e.features[0].properties.wheelchair != ""){
-
-        }
-        if(e.features[0].properties.beds != ""){
-
-        }
-
 
         return desc;
      }
