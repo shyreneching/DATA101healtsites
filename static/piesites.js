@@ -72,7 +72,7 @@ $(document).ready(function () {
         .join("path")
         .attr("class", "arc-piesites")
         .attr('d', d3.arc()
-          .innerRadius(0)
+          .innerRadius(50)
           .outerRadius(radius - 10)
         )
         .attr('fill', function(d){ return(colorScale(d.data[""])) })
