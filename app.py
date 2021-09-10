@@ -76,6 +76,34 @@ def get_pie_sites_data():
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
 
+@app.route('/piesitesdata/<worker>/<sector>/<amenity>/<location>')
+def get_pie_sites_data_filtered(worker, sector, amenity, location):
+    df = pd.read_csv(actual_data_url)
+
+    arr = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
+
+    if amenity != "null" and amenity != "ALL":
+        arr = [amenity]
+
+    filtered_df = df[['Region', 'Province'] + arr.copy()].copy()
+    filtered_df.columns = ['region', 'province'] + arr.copy()
+
+    if location != "null" and location != "ALL":
+        if location.startswith('region_'):
+            location = location[7:]
+            print(location)
+            filtered_df = filtered_df[filtered_df['region'] == location]
+        else:
+            filtered_df = filtered_df[filtered_df['province'] == location]
+
+    filtered_df=filtered_df[arr].copy()
+    filtered_df.columns = arr.copy()
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[-1]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
+
 @app.route('/pieworkersdata')
 def get_pie_workers_data():
     df = pd.read_csv(actual_data_url)
@@ -83,6 +111,34 @@ def get_pie_workers_data():
     filtered_df = df[['Total - Dentist', 'Total - Doctor - Clinical', 'Total - Medical Technologist', 'Total - Midwife','Total - Nurse', 'Total - Nutritionist or Dietician','Total - Occupational Therapist','Total - Pharmacist','Total - Physical Therapist','Total - Radiologic Technologist','Total - X-ray Technologist']].copy()
     filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologist', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
 
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[-1]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
+
+@app.route('/pieworkersdata/<worker>/<sector>/<amenity>/<location>')
+def get_pie_workers_data_filtered(worker, sector, amenity, location):
+    df = pd.read_csv(actual_data_url)
+
+    arr = ['Dentist', 'Doctor - Clinical', 'Medical Technologist', 'Midwife','Nurse', 'Nutritionist or Dietician','Occupational Therapist','Pharmacist','Physical Therapist','Radiologic Technologist','X-ray Technologist']
+
+    if worker != "null" and worker != "ALL":
+        arr = [worker]
+
+    filtered_df = df[['Region', 'Province'] + list(map(lambda x: sector + " - " + x, arr))].copy()
+    filtered_df.columns = ['region', 'province'] + arr.copy()
+
+    if location != "null" and location != "ALL":
+        if location.startswith('region_'):
+            location = location[7:]
+            print(location)
+            filtered_df = filtered_df[filtered_df['region'] == location]
+        else:
+            filtered_df = filtered_df[filtered_df['province'] == location]
+
+    filtered_df=filtered_df[arr].copy()
+    filtered_df.columns = arr.copy()
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[-1]
 
