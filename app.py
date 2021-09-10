@@ -102,6 +102,24 @@ def get_number_workers():
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numworkers.csv"})
 
+@app.route('/numworkers/<worker>/<sector>/<amenity>/<location>')
+def get_number_workers_filtered(worker, sector, amenity, location):
+    df = pd.read_csv(actual_data_url)
+
+    arr = ['Dentist', 'Doctor - Clinical', 'Medical Technologist', 'Midwife','Nurse', 'Nutritionist or Dietician','Occupational Therapist','Pharmacist','Physical Therapist','Radiologic Technologist','X-ray Technologist']
+
+    if worker != "none" and worker != "ALL":
+        arr = [worker]
+
+    filtered_df = df[list(map(lambda x: sector + " - " + x, arr))].copy()
+    filtered_df.columns = arr.copy()
+
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[[-1]]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numworkers.csv"})
+
 @app.route('/numsites')
 def get_number_sites():
     df = pd.read_csv(actual_data_url)
