@@ -90,6 +90,7 @@ p {
   height: 40%;
   position: absolute;
   z-index: 99;
+  margin-top: 20px;
 }
 
 .accordion-item,
@@ -149,14 +150,15 @@ p {
   width: inherit;
   font-size: 12px;
   background-color: white;
-  color: #B17474;
+  color: #9e2e44;
+  font-weight: bold;
   border-bottom: 0.2px solid #DBA9A9;
 }
 
 option,
 .form-select {
   font-size: 12px;
-  color: #B17474;
+  color: #9e2e44;
 }
 
 .bubbles {
