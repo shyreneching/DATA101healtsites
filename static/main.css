@@ -161,6 +161,11 @@ option,
   color: #9e2e44;
 }
 
+.form-check-input:checked {
+    background-color: #B17474;
+    border-color: #B17474;
+}
+
 .bubbles {
   stroke-width: 2px;
   stroke: white;
@@ -184,7 +189,7 @@ option,
 }
 
 #floating_stats {
-  width: 15%;
+  width: 25%;
   /* position: absolute; */
   margin-right: 50px;
   margin-top: 30px;
