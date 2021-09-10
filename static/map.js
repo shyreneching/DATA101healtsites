@@ -23,6 +23,12 @@ map.on('load', () => {
         data: 'https://raw.githubusercontent.com/shyreneching/DATA101healtsites/main/data/healthsites.geojson'
     });
 
+    map.addSource('workers', {
+        type: 'geojson',
+        data: 'mapbox://shyreneching.3wjtx73g'
+    });
+    
+
     map.addLayer({
         id: 'healthsites',
         type: 'circle',
@@ -42,6 +48,45 @@ map.on('load', () => {
         },
     });
 
+    map.addLayer({
+            'id': 'healthworker',
+            'source': 'workers',
+            'source-layer': 'state_county_population_2014_cen',
+            'maxzoom': zoomThreshold,
+            'type': 'fill',
+            // only include features for which the "isState"
+            // // property is "true"
+            // 'filter': ['==', 'isState', true],
+            'paint': {
+                'fill-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'population'],
+                    0,
+                    '#F2F12D',
+                    500000,
+                    '#EED322',
+                    750000,
+                    '#E6B71E',
+                    1000000,
+                    '#DA9C20',
+                    2500000,
+                    '#CA8323',
+                    5000000,
+                    '#B86B25',
+                    7500000,
+                    '#A25626',
+                    10000000,
+                    '#8B4225',
+                    25000000,
+                    '#723122'
+                ],
+                'fill-opacity': 0.75
+            }
+        },
+        'waterway-label'
+    );
+
     const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -53,14 +98,14 @@ map.on('load', () => {
         // console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        var description =  "<b>"+titleCase(e.features[0].properties.name) + "</b>"+
-                            "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
-                            // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
-                            "<br>Region: " + e.features[0].properties.Region +
-                            "<br>Province: " + e.features[0].properties.province +
-                            long_desc(e);
+        var description = "<b>" + titleCase(e.features[0].properties.name) + "</b>" +
+            "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
+            // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
+            "<br>Region: " + e.features[0].properties.Region +
+            "<br>Province: " + e.features[0].properties.province +
+            long_desc(e);
 
-        if (description.substring(0,4) == "<b><"){
+        if (description.substring(0, 4) == "<b><") {
             description = description.replace("<b></b>", "");
             description = description.substring(4);
         }
@@ -91,65 +136,65 @@ map.on('load', () => {
         }
         // Directly return the joined string
         return splitStr.join(' ');
-     }
+    }
 
-     function long_desc(e) {
+    function long_desc(e) {
         var desc = "";
 
 
-        if(e.features[0].properties.opening_hours != ""){
+        if (e.features[0].properties.opening_hours != "") {
             desc = desc + "<br>Opening Hours: " + e.features[0].properties.opening_hours;
         }
-        if(e.features[0].properties.contact_number != ""){
+        if (e.features[0].properties.contact_number != "") {
             desc = desc + "<br>Contact Number: " + e.features[0].properties.contact_number;
         }
-        if(e.features[0].properties.health_amenity_type != ""){
+        if (e.features[0].properties.health_amenity_type != "") {
             desc = desc + "<br>Health Amenity Type: " + e.features[0].properties.health_amenity_type;
         }
-        if(e.features[0].properties.operational_status != ""){
+        if (e.features[0].properties.operational_status != "") {
             desc = desc + "<br>Operational Status: " + e.features[0].properties.operational_status;
         }
-        if(e.features[0].properties.staff_doctors != ""){
+        if (e.features[0].properties.staff_doctors != "") {
             desc = desc + "<br>Staff Doctors: " + e.features[0].properties.staff_doctors;
         }
-        if(e.features[0].properties.staff_nurses != ""){
+        if (e.features[0].properties.staff_nurses != "") {
             desc = desc + "<br>Staff Nurses: " + e.features[0].properties.staff_nurses;
         }
-        if(e.features[0].properties.wheelchair != ""){
+        if (e.features[0].properties.wheelchair != "") {
             desc = desc + "<br>Wheelchair: " + e.features[0].properties.wheelchair;
         }
-        if(e.features[0].properties.beds != ""){
+        if (e.features[0].properties.beds != "") {
             desc = desc + "<br>Bed: " + e.features[0].properties.beds;
         }
-        if(e.features[0].properties.electricity != ""){
+        if (e.features[0].properties.electricity != "") {
             desc = desc + "<br>Electricity: " + e.features[0].properties.electricity;
         }
-        if(e.features[0].properties.water_source != ""){
+        if (e.features[0].properties.water_source != "") {
             desc = desc + "<br>Water Source: " + e.features[0].properties.water_source;
         }
-        if(e.features[0].properties.emergency != ""){
+        if (e.features[0].properties.emergency != "") {
             var add = e.features[0].properties.emergency;
             add.replace(0, "No");
             add.replace(1, "Yes");
             desc = desc + "<br>Emergency: " + add;
         }
-        if(e.features[0].properties.is_in_health_zone != ""){
+        if (e.features[0].properties.is_in_health_zone != "") {
             var add = e.features[0].properties.is_in_health_zone;
             add.replace(0, "No");
             add.replace(1, "Yes");
             desc = desc + "<br>In Health Zone: " + add;
         }
-        if(e.features[0].properties.is_in_health_area != ""){
+        if (e.features[0].properties.is_in_health_area != "") {
             var add = e.features[0].properties.is_in_health_area;
             add.replace(0, "No");
             add.replace(1, "Yes");
             desc = desc + "<br>In Health Area: " + add;
-        }        
-        if(e.features[0].properties.insurance != ""){
+        }
+        if (e.features[0].properties.insurance != "") {
             desc = desc + "<br>Insurance: " + e.features[0].properties.insurance;
         }
 
         return desc;
-     }
+    }
 
 });
