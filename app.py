@@ -81,7 +81,7 @@ def get_pie_workers_data():
     df = pd.read_csv(actual_data_url)
 
     filtered_df = df[['Total - Dentist', 'Total - Doctor - Clinical', 'Total - Medical Technologist', 'Total - Midwife','Total - Nurse', 'Total - Nutritionist or Dietician','Total - Occupational Therapist','Total - Pharmacist','Total - Physical Therapist','Total - Radiologic Technologist','Total - X-ray Technologist']].copy()
-    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologists', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
+    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologist', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
 
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[-1]
@@ -94,7 +94,7 @@ def get_number_workers():
     df = pd.read_csv(actual_data_url)
 
     filtered_df = df[['Total - Dentist', 'Total - Doctor - Clinical', 'Total - Medical Technologist', 'Total - Midwife','Total - Nurse', 'Total - Nutritionist or Dietician','Total - Occupational Therapist','Total - Pharmacist','Total - Physical Therapist','Total - Radiologic Technologist','Total - X-ray Technologist']].copy()
-    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologists', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
+    filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologist', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
 
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[[-1]]
