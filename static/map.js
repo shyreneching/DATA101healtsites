@@ -33,9 +33,31 @@ $(document).ready(function () {
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'province']], this.value]);
             map.setFilter('healthworker', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_midwife', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_nurse', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_n_d', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_ot', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_pharmacist', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_pt', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_rt', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_xray', ['!=', ['string', ['get', 'Province']], this.value]);
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'province']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_midwife', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_nurse', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_n_d', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_ot', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_pharmacist', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_pt', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_rt', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_xray', ['==', ['string', ['get', 'Province']], this.value]);
         }
     });
 
@@ -45,9 +67,32 @@ $(document).ready(function () {
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_midwife', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_nurse', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_n_d', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_ot', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_pharmacist', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_pt', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_rt', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_xray', ['!=', ['string', ['get', 'Region']], this.value]);
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_midwife', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_nurse', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_n_d', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_ot', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_pharmacist', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_pt', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_rt', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_xray', ['==', ['string', ['get', 'Region']], this.value]);
         }
     });
 });
@@ -83,83 +128,7 @@ map.on('load', () => {
         url: 'mapbox://shyreneching.3wjtx73g',
     });
 
-    map.addLayer({
-        type: 'fill',
-        'id': 'healthworker',
-        'source': 'workers',
-        'source-layer': 'healthworkers-86lyvc',
-        "minzoom": 6,
-        paint: {
-            'fill-color': [
-                'interpolate',
-                ['linear'],
-                ['number', ['get', 'Total - Grand Total']],
-                // ['get', 'Total - Grand Total'],
-                0, '#ffffff',
-                1000, '#fed8d8',
-                5000, '#f07272',
-                7000, '#e71414',
-                10000, '#960b0b',
-                20000, '#650b0b',
-                32000, '#600101',
-            ],
-            'fill-outline-color': '#777777'
-        }
-    }, 'waterway-label');
-
-    map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
-        type: 'fill',
-        'id': 'healthworker_private',
-        'source': 'workers',
-        'source-layer': 'healthworkers-86lyvc',
-        'visibility': 'none',
-        paint: {
-            'fill-color': [
-                'interpolate',
-                ['linear'],
-                ['get', 'Private - Grand Total'],
-                0, '#ffffff',
-                1000, '#fed8d8',
-                5000, '#f07272',
-                7000, '#e71414',
-                10000, '#960b0b',
-                20000, '#650b0b',
-                32000, '#600101',
-            ],
-            'fill-outline-color': '#777777'
-        }
-    }, 'waterway-label');
-
-    map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
-        type: 'fill',
-        'id': 'healthworker_public',
-        'source': 'workers',
-        'source-layer': 'healthworkers-86lyvc',
-        'visibility': 'none',
-        paint: {
-            'fill-color': [
-                'interpolate',
-                ['linear'],
-                ['get', 'Public - Grand Total'],
-                0, '#ffffff',
-                1000, '#fed8d8',
-                5000, '#f07272',
-                7000, '#e71414',
-                10000, '#960b0b',
-                20000, '#650b0b',
-                32000, '#600101',
-            ],
-            'fill-outline-color': '#777777'
-        }
-    }, 'waterway-label');
+    
 
     const popup = new mapboxgl.Popup({
         closeButton: false,
@@ -313,7 +282,7 @@ map.on('load', () => {
 
         return desc;
     }
-    
+
     map.addLayer({
         source: {
             type: 'vector',
@@ -347,7 +316,7 @@ map.on('load', () => {
             url: 'mapbox://shyreneching.3wjtx73g',
         },
         type: 'fill',
-        'id': 'healthworker_doctor_clinical',
+        'id': 'healthworker_drclinical',
         'source': 'workers',
         'source-layer': 'healthworkers-86lyvc',
         'visibility': 'none',
@@ -374,7 +343,7 @@ map.on('load', () => {
             url: 'mapbox://shyreneching.3wjtx73g',
         },
         type: 'fill',
-        'id': 'healthworker_medical_technologist',
+        'id': 'healthworker_mt',
         'source': 'workers',
         'source-layer': 'healthworkers-86lyvc',
         'visibility': 'none',
@@ -612,5 +581,86 @@ map.on('load', () => {
         }
     }, 'waterway-label');
 
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_private',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Private - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_public',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Public - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+
+
+    map.addLayer({
+        type: 'fill',
+        'id': 'healthworker',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        "minzoom": 6,
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['number', ['get', 'Total - Grand Total']],
+                // ['get', 'Total - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    
     
 });
