@@ -71,7 +71,7 @@ def get_pie_sites_data():
     filtered_df.columns = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
 
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
-    filtered_df=filtered_df.iloc[-1]
+    filtered_df=filtered_df.iloc[-1].sort_values(ascending=False)
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
@@ -112,7 +112,7 @@ def get_pie_workers_data():
     filtered_df.columns = ['dentist', 'doctor - clinical', 'medical technologist', 'midwife','nurse', 'nutritionist or dietician','occupational therapist','pharmacist','physical therapist','radiologic technologist', 'x-ray technologist']
 
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
-    filtered_df=filtered_df.iloc[-1]
+    filtered_df=filtered_df.iloc[-1].sort_values(ascending=False)
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
