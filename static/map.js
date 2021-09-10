@@ -1,8 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpa2EtY2hhbiIsImEiOiJja3J1YjE5NXMxMDA2Mm9tZmsyMjZpcjJ5In0.NvcmxedWpkjDDHd315UDRg';
 var tile_filter;
 const bounds = [
-    [103.047041, 4.267536], // Southwest coordinates
-    [139.578562, 20.830064] // Northeast coordinates
+    [104.047041, 4.267536], // Southwest coordinates
+    [139.578562, 20.870064] // Northeast coordinates
 ];
 
 var map = new mapboxgl.Map({
