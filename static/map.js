@@ -191,7 +191,7 @@ map.on('load', () => {
 
         for (var i of arr1){
             for (var j of arr2){
-                map.setLayoutProperty('healthworker'+i+j, 'visibility', 'none');
+                map.setLayoutProperty('healthworker'+j+i, 'visibility', 'none');
             }
         }
     }
@@ -201,61 +201,47 @@ map.on('load', () => {
         var sector = $('input[name="inlineRadioOptions"]:checked').val();
 
         setLayersToInvisible()
-        if (worker == null ||worker === 'ALL') {
-            if (sector === 'Total') {
-                map.setLayoutProperty('healthworker', 'visibility', 'visible');
-            } else if (sector === 'Private') {
-                map.setLayoutProperty('healthworker_private', 'visibility', 'visible');
-            } else if (sector === 'Public') {
-                map.setLayoutProperty('healthworker_public', 'visibility', 'visible');
-            }
-        } else if (worker == 'Doctor - Clinical') {
-          
-        } else if (worker === 'Medical Technologist') {
-            
-        } else if (worker === 'Midwife') {
-            
-        } else if (worker === 'Nutritionist or Dietician') {
-            
-        } else if (worker === 'Occupational Therapist') {
-            
-        } else if (worker === 'Pharmacist') {
-            
-        } else if (worker === 'Physical Therapist') {
-            
-        } else if (worker === 'Radiologic Technologist') {
-           
-        } else if (worker === 'X-ray Technologist') {
-           
-        } else if (worker === 'Dentist') {
-            
-        } else if (worker === 'Nurse') {
-            
+        var layer = 'healthworker'
+
+        if (sector === 'Private') {
+            layer = layer + '_private'
+        } else if (sector === 'Public') {
+            layer = layer + '_public'
         }
+
+        if (worker == 'Doctor - Clinical') {
+            layer = layer + '_drclinical'
+        } else if (worker === 'Medical Technologist') {
+            layer = layer + '_mt'
+        } else if (worker === 'Midwife') {
+            layer = layer + '_midwife'
+        } else if (worker === 'Nutritionist or Dietician') {
+            layer = layer + '_n_d'
+        } else if (worker === 'Occupational Therapist') {
+            layer = layer + '_ot'
+        } else if (worker === 'Pharmacist') {
+            layer = layer + '_pharmacist'
+        } else if (worker === 'Physical Therapist') {
+            layer = layer + '_pt'
+        } else if (worker === 'Radiologic Technologist') {
+            layer = layer + '_rt'
+        } else if (worker === 'X-ray Technologist') {
+            layer = layer + '_xray'
+        } else if (worker === 'Dentist') {
+            layer = layer + '_dentist'
+        } else if (worker === 'Nurse') {
+            layer = layer + '_nurse'
+        }
+
+        map.setLayoutProperty(layer, 'visibility', 'visible');
     }
 
     $('input[type=radio]').click(function () {
-        const sect = this.value;
-        console.log(sect)
-        // update the map filter
-        if (sect === 'Total') {
-            map.setLayoutProperty('healthworker', 'visibility', 'visible');
-            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
-            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
-        } else if (sect === 'Private') {
-            map.setLayoutProperty('healthworker', 'visibility', 'none');
-            map.setLayoutProperty('healthworker_private', 'visibility', 'visible');
-            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
-        } else if (sect === 'Public') {
-            map.setLayoutProperty('healthworker', 'visibility', 'none');
-            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
-            map.setLayoutProperty('healthworker_public', 'visibility', 'visible');
-        }
+        filterMapWorker()
     });
 
     document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
-        console.log('You selected: ', this.value);
-        
+        filterMapWorker()
     });
 
     function titleCase(str) {
