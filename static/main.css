@@ -62,16 +62,19 @@ p {
 
 .container-fluid {
   height: 100%;
+  position: relative;
   background-color: #EBDCDC;
 }
 
 #map {
+  min-height: 100%
   background-color: white;
   margin: 10px 10px 0px 10px;
 }
 
 #second_row {
   /* background-color: white; */
+  min-height: 80%;
   margin: 0px 10px 10px 10px;
 }
 
@@ -217,3 +220,11 @@ option,
       50%      { bottom:15px; }
       100%     {bottom:0;}
     }
+
+#footer {
+  position: relative;
+  bottom: 0;
+  height: 100px;
+  background-color: #DBA9A9;
+  color: #464646;
+}
