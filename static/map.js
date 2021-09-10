@@ -16,17 +16,11 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
-    //put things here
-
     map.addSource('sites', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/shyreneching/DATA101healtsites/main/data/healthsites.geojson'
     });
 
-    // map.addSource('workers', {
-    //     type: 'vector',
-    //     data: 'mapbox://shyreneching.3wjtx73g'
-    // });
     
     map.addLayer({
         id: 'healthsites',
@@ -47,42 +41,17 @@ map.on('load', () => {
         },
     });
 
-    // map.addLayer({
-    //         'id': 'healthworker',
-    //         'source': 'workers',
-    //         'source-layer': 'healthworkers-86lyvc',
-    //         'type': 'fill',
-    //         paint: {
-    //             'fill-color': [
-    //                 'interpolate',
-    //                 ['linear'],
-    //                 ['get', 'Total - Grand Total'],
-    //                 0, '#ffffff',
-    //                 1000, '#fed8d8',
-    //                 5000, '#f07272',
-    //                 7000, '#e71414',
-    //                 10000, '#960b0b',
-    //                 12000, '#650b0b',
-    //                 32000, '#600101',
-    //                 // 1397715000, '#005824',
-    //             ],
-    //             'fill-outline-color': '#777777'
-    //         }
-    //     },
-    //     'waterway'
-    // );
-
     map.addSource('workers', {
         type: 'vector',
         url: 'mapbox://shyreneching.3wjtx73g',
     });
 
     map.addLayer({
-
         type: 'fill',
         'id': 'healthworker',
         'source': 'workers',
         'source-layer': 'healthworkers-86lyvc',
+        "minzoom": 6,
         paint: {
             'fill-color': [
                 'interpolate',
@@ -98,7 +67,7 @@ map.on('load', () => {
             ],
             'fill-outline-color': '#777777'
         }
-    }, 'waterway');
+    }, 'waterway-label');
 
     const popup = new mapboxgl.Popup({
         closeButton: false,
