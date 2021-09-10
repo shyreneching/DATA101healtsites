@@ -33,6 +33,8 @@ $(document).ready(function () {
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'province']], this.value]);
             map.setFilter('healthworker', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_private', ['!=', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_public', ['!=', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Province']], this.value]);
@@ -47,6 +49,8 @@ $(document).ready(function () {
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'province']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_private', ['==', ['string', ['get', 'Province']], this.value]);
+            map.setFilter('healthworker_public', ['==', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Province']], this.value]);
             map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Province']], this.value]);
@@ -67,6 +71,8 @@ $(document).ready(function () {
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_private', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_public', ['!=', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Region']], this.value]);
@@ -81,7 +87,8 @@ $(document).ready(function () {
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_private', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker_public', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Region']], this.value]);
