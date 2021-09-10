@@ -99,7 +99,7 @@ def get_pie_sites_data_filtered(worker, sector, amenity, location):
     filtered_df=filtered_df[arr].copy()
     filtered_df.columns = arr.copy()
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
-    filtered_df=filtered_df.iloc[-1]
+    filtered_df=filtered_df.iloc[-1].sort_values(ascending=False)
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
@@ -140,7 +140,7 @@ def get_pie_workers_data_filtered(worker, sector, amenity, location):
     filtered_df=filtered_df[arr].copy()
     filtered_df.columns = arr.copy()
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
-    filtered_df=filtered_df.iloc[-1]
+    filtered_df=filtered_df.iloc[-1].sort_values(ascending=False)
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=piesites.csv"})
