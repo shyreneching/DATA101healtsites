@@ -11,7 +11,7 @@ var colors_workers = [
   '#7d998f',
   '#d4cad5',
   '#175967',
-  '#3d5257',
+  '#83b5c1',
   '#e64e58',
   '#7c8f9e'
 ]
@@ -45,7 +45,7 @@ $(document).ready(function () {
       var arc = d3.arc()
           .innerRadius(50)
           .outerRadius(radius - 10)
-      
+
       var tooltip = d3.select("#pie_typesofhealthworkers")
         .append("div")
         .style("display", "none")
@@ -108,14 +108,14 @@ $(document).ready(function () {
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
-      
+
       legendG.append("rect") // make a matching color rect
         .attr("width", 8)
         .attr("height", 8)
         .attr("fill", function(d, i) {
           return colorScale(d.data[""]);
         });
-      
+
       legendG.append("text") // add the text
         .text(function(d){
           return d.data[""].toUpperCase();
@@ -142,7 +142,7 @@ $(document).ready(function () {
         var arc = d3.arc()
           .innerRadius(50)
           .outerRadius(radius - 10)
-        
+
         var tooltip = d3.select("#pie_typesofhealthworkers")
           .append("div")
           .style("display", "none")
@@ -227,7 +227,7 @@ $(document).ready(function () {
                 exit
                 .remove();
               })
-          })          
+          })
 
         var legendG = pie_workers.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
           .data(pie(data))
@@ -239,14 +239,14 @@ $(document).ready(function () {
           .on("mouseover", showTooltip)
           .on("mousemove", moveTooltip)
           .on("mouseleave", hideTooltip)
-        
+
         legendG.append("rect") // make a matching color rect
           .attr("width", 8)
           .attr("height", 8)
           .attr("fill", function(d, i) {
             return colorScale(d.data[""]);
           });
-        
+
         legendG.append("text") // add the text
           .text(function(d){
             return d.data[""].toUpperCase();
@@ -270,11 +270,11 @@ $(document).ready(function () {
           d3.selectAll(".workerslegend").remove()
           d3.selectAll(".tooltip-pieworkers").remove();
           inFlag = false
-  
+
           var arc = d3.arc()
             .innerRadius(50)
             .outerRadius(radius - 10)
-          
+
           var tooltip = d3.select("#pie_typesofhealthworkers")
             .append("div")
             .style("display", "none")
@@ -284,7 +284,7 @@ $(document).ready(function () {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .style("color", "white")
-  
+
           var showTooltip = function (event,d) {
               inFlag = true
               tooltip
@@ -310,10 +310,10 @@ $(document).ready(function () {
                   .style("opacity", 0)
                   .style("display", "none")
           }
-  
+
           var pie = d3.pie()
             .value(function (d) {return d["total"];});
-  
+
           pie_workers.selectAll(".arc-pieworkers")
             .data(pie(data))
             .join(function(enter){
@@ -359,8 +359,8 @@ $(document).ready(function () {
                   exit
                   .remove();
                 })
-            })          
-  
+            })
+
           var legendG = pie_workers.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
             .data(pie(data))
             .enter().append("g")
@@ -371,14 +371,14 @@ $(document).ready(function () {
             .on("mouseover", showTooltip)
             .on("mousemove", moveTooltip)
             .on("mouseleave", hideTooltip)
-          
+
           legendG.append("rect") // make a matching color rect
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
               return colorScale(d.data[""]);
             });
-          
+
           legendG.append("text") // add the text
             .text(function(d){
               return d.data[""].toUpperCase();
@@ -399,11 +399,11 @@ $(document).ready(function () {
           d3.selectAll(".workerslegend").remove()
           d3.selectAll(".tooltip-pieworkers").remove();
           inFlag = false
-  
+
           var arc = d3.arc()
             .innerRadius(50)
             .outerRadius(radius - 10)
-          
+
           var tooltip = d3.select("#pie_typesofhealthworkers")
             .append("div")
             .style("display", "none")
@@ -413,7 +413,7 @@ $(document).ready(function () {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .style("color", "white")
-  
+
           var showTooltip = function (event,d) {
               inFlag = true
               tooltip
@@ -439,10 +439,10 @@ $(document).ready(function () {
                   .style("opacity", 0)
                   .style("display", "none")
           }
-  
+
           var pie = d3.pie()
             .value(function (d) {return d["total"];});
-  
+
           pie_workers.selectAll(".arc-pieworkers")
             .data(pie(data))
             .join(function(enter){
@@ -488,8 +488,8 @@ $(document).ready(function () {
                   exit
                   .remove();
                 })
-            })          
-  
+            })
+
           var legendG = pie_workers.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
             .data(pie(data))
             .enter().append("g")
@@ -500,14 +500,14 @@ $(document).ready(function () {
             .on("mouseover", showTooltip)
             .on("mousemove", moveTooltip)
             .on("mouseleave", hideTooltip)
-          
+
           legendG.append("rect") // make a matching color rect
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
               return colorScale(d.data[""]);
             });
-          
+
           legendG.append("text") // add the text
             .text(function(d){
               return d.data[""].toUpperCase();
@@ -531,11 +531,11 @@ $(document).ready(function () {
           d3.selectAll(".workerslegend").remove()
           d3.selectAll(".tooltip-pieworkers").remove();
           inFlag = false
-  
+
           var arc = d3.arc()
             .innerRadius(50)
             .outerRadius(radius - 10)
-          
+
           var tooltip = d3.select("#pie_typesofhealthworkers")
             .append("div")
             .style("display", "none")
@@ -545,7 +545,7 @@ $(document).ready(function () {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .style("color", "white")
-  
+
           var showTooltip = function (event,d) {
               inFlag = true
               tooltip
@@ -571,10 +571,10 @@ $(document).ready(function () {
                   .style("opacity", 0)
                   .style("display", "none")
           }
-  
+
           var pie = d3.pie()
             .value(function (d) {return d["total"];});
-  
+
           pie_workers.selectAll(".arc-pieworkers")
             .data(pie(data))
             .join(function(enter){
@@ -620,8 +620,8 @@ $(document).ready(function () {
                   exit
                   .remove();
                 })
-            })          
-  
+            })
+
           var legendG = pie_workers.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
             .data(pie(data))
             .enter().append("g")
@@ -632,14 +632,14 @@ $(document).ready(function () {
             .on("mouseover", showTooltip)
             .on("mousemove", moveTooltip)
             .on("mouseleave", hideTooltip)
-          
+
           legendG.append("rect") // make a matching color rect
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
               return colorScale(d.data[""]);
             });
-          
+
           legendG.append("text") // add the text
             .text(function(d){
               return d.data[""].toUpperCase();
@@ -650,5 +650,5 @@ $(document).ready(function () {
         })
     })
 
-    
+
   });
