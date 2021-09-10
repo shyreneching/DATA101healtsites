@@ -14,7 +14,7 @@ $(document).ready(function () {
     var colorScale, inFlag = false;
 
     // Creates sources <svg> element
-    var pie_sites = d3.select("#pie_typesofhealthworkers")
+    var pie_workers = d3.select("#pie_typesofhealthworkers")
       .append("svg")
       .attr("width", pie_width)
       .attr("height", pie_height)
@@ -32,7 +32,7 @@ $(document).ready(function () {
         .append("div")
         .style("display", "none")
         .style("opacity", 0)
-        .attr("class", "tooltip tooltip-piesites")
+        .attr("class", "tooltip tooltip-pieworkers")
         .style("background-color", "black")
         .style("border-radius", "5px")
         .style("padding", "10px")
@@ -67,10 +67,10 @@ $(document).ready(function () {
       var pie = d3.pie()
         .value(function (d) {return d["total"];});
 
-      pie_sites.selectAll("arc-piesites")
+      pie_workers.selectAll("arc-pieworkers")
         .data(pie(data))
         .join("path")
-        .attr("class", "arc-piesites")
+        .attr("class", "arc-pieworkers")
         .attr('d', d3.arc()
           .innerRadius(50)
           .outerRadius(radius - 10)
@@ -83,13 +83,13 @@ $(document).ready(function () {
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
 
-      var legendG = pie_sites.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
+      var legendG = pie_workers.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
         .data(pie(data))
         .enter().append("g")
         .attr("transform", function(d,i){
           return "translate(" + (pie_width - 240) + "," + (i * 15 - 85) + ")"; // place each legend on the right and bump each one down 15 pixels
         })
-        .attr("class", "legend")
+        .attr("class", "legend workerslegend")
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
