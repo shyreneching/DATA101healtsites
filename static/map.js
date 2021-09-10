@@ -17,21 +17,6 @@ var map = new mapboxgl.Map({
 
 
 $(document).ready(function () {
-    $('input[type=radio]').click(function () {
-        const sect = this.value;
-        console.log(sect)
-        // update the map filter
-        if (sect === 'Total') {
-            tile_filter = ['!=', ['number', ['get', 'Total - Grand Total'], -1]];
-        } else if (sect === 'Private') {
-            tile_filter = ['!=', ['number', ['get', 'Private - Grand Total'], -1]];
-        } else if (sect === 'Public') {
-            tile_filter = ['!=', ['number', ['get', 'Public - Grand Total'], -1]];
-        } else {
-            console.log('error');
-        }
-        map.setFilter('healthworker', ['all', tile_filter]);
-    });
 
 
     document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
@@ -95,8 +80,6 @@ $(document).ready(function () {
             map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
         }
-
-
     });
 });
 
@@ -155,6 +138,60 @@ map.on('load', () => {
         }
     }, 'waterway-label');
 
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_private',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Private - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_public',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Public - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
     const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -163,7 +200,6 @@ map.on('load', () => {
     map.on('mouseenter', 'healthsites', (e) => {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
-        // console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
         var description = "<b>" + titleCase(e.features[0].properties.name) + "</b>" +
@@ -193,6 +229,25 @@ map.on('load', () => {
     map.on('mouseleave', 'healthsites', () => {
         map.getCanvas().style.cursor = '';
         popup.remove();
+    });
+
+    $('input[type=radio]').click(function () {
+        const sect = this.value;
+        console.log(sect)
+        // update the map filter
+        if (sect === 'Total') {
+            map.setLayoutProperty('healthworker', 'visibility', 'visible');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
+        } else if (sect === 'Private') {
+            map.setLayoutProperty('healthworker', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'visible');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
+        } else if (sect === 'Public') {
+            map.setLayoutProperty('healthworker', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'visible');
+        } 
     });
 
     function titleCase(str) {
