@@ -2,7 +2,7 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-var colors = [
+var colors_piesites = [
   '#9d8c7a',
   '#d0b484',
   '#dfdcc9',
@@ -38,7 +38,7 @@ $(document).ready(function () {
       inFlag = false
 
       var keys = [...new Set(data.map(function(d) { return d[""]; }))];  
-      colorScale = d3.scaleOrdinal(keys, colors);
+      colorScale = d3.scaleOrdinal(keys, colors_piesites);
   
       var arc = d3.arc()
           .innerRadius(50)

@@ -2,11 +2,11 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-var colors = [
+var colors_workers = [
   '#bf7c8b',
   '#e69792',
   '#635980',
-  '#d9a89c',
+  '#f9c7c9',
   '#f8f3dd',
   '#7d998f',
   '#d4cad5',
@@ -40,7 +40,7 @@ $(document).ready(function () {
       inFlag = false
 
       var keys = [...new Set(data.map(function(d) { return d[""]; }))];
-      colorScale = d3.scaleOrdinal(keys, colors);
+      colorScale = d3.scaleOrdinal(keys, colors_workers);
 
       var arc = d3.arc()
           .innerRadius(50)
