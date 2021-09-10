@@ -93,14 +93,14 @@ $(document).ready(function(){
                         "</h6>Health workers: " + numberWithCommas(d.workers) +
                         "<br>Health sites: " + numberWithCommas(d.sites) +
                         "<br>Population: " + numberWithCommas(d.population))
-                    .style("left", (event.pageX - 100) + "px")
-                    .style("top", (event.pageY - 130) + "px")
+                    .style("left", (event.pageX - 200) + "px")
+                    .style("top", (event.pageY - 250) + "px")
             }
             var moveTooltip = function (event, d) {
                 if(inFlag){
                     tooltip
-                        .style("left", (event.pageX - 100) + "px")
-                        .style("top", (event.pageY - 130) + "px")
+                        .style("left", (event.pageX - 200) + "px")
+                        .style("top", (event.pageY - 250) + "px")
                 } else {
                     showTooltip(event, d)
                 }
@@ -230,14 +230,14 @@ $(document).ready(function(){
                         "</h6>Health workers: " + numberWithCommas(d.workers) +
                         "<br>Health sites: " + numberWithCommas(d.sites) +
                         "<br>Population: " + numberWithCommas(d.population))
-                    .style("left", (event.pageX - 100) + "px")
-                    .style("top", (event.pageY - 130) + "px")
+                    .style("left", (event.pageX - 200) + "px")
+                    .style("top", (event.pageY - 250) + "px")
             }
             var moveTooltip = function (event, d) {
                 if(inFlag){
                     tooltip
-                        .style("left", (event.pageX - 100) + "px")
-                        .style("top", (event.pageY - 130) + "px")
+                        .style("left", (event.pageX - 200) + "px")
+                        .style("top", (event.pageY - 250) + "px")
                 } else {
                     showTooltip(event, d)
                 }
@@ -375,14 +375,14 @@ $(document).ready(function(){
                     "</h6>Health workers: " + numberWithCommas(d.workers) +
                     "<br>Health sites: " + numberWithCommas(d.sites) +
                     "<br>Population: " + numberWithCommas(d.population))
-                .style("left", (event.pageX - 100) + "px")
-                .style("top", (event.pageY - 130) + "px")
+                .style("left", (event.pageX - 200) + "px")
+                .style("top", (event.pageY - 250) + "px")
         }
         var moveTooltip = function (event, d) {
             if(inFlag){
                 tooltip
-                    .style("left", (event.pageX - 100) + "px")
-                    .style("top", (event.pageY - 130) + "px")
+                    .style("left", (event.pageX - 200) + "px")
+                    .style("top", (event.pageY - 250) + "px")
             } else {
                 showTooltip(event, d)
             }
