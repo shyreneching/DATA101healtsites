@@ -25,7 +25,7 @@ $(document).ready(function () {
     const pie_height = 200;
     const radius = Math.min(pie_width, pie_height) / 2;
 
-    var colorScale, inFlag = false;
+    var colorScale_workers, inFlag = false;
 
     // Creates sources <svg> element
     var pie_workers = d3.select("#pie_typesofhealthworkers")
@@ -40,7 +40,7 @@ $(document).ready(function () {
       inFlag = false
 
       var keys = [...new Set(data.map(function(d) { return d[""]; }))];
-      colorScale = d3.scaleOrdinal(keys, colors_workers);
+      colorScale_workers = d3.scaleOrdinal(keys, colors_workers);
 
       var arc = d3.arc()
           .innerRadius(50)
@@ -90,7 +90,7 @@ $(document).ready(function () {
         .join("path")
         .attr("class", "arc-pieworkers")
         .attr('d', arc)
-        .attr('fill', function(d){ return(colorScale(d.data[""])) })
+        .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
         .attr("stroke", "white")
         .style("stroke-width", "2px")
         .style("opacity", 1)
@@ -113,7 +113,7 @@ $(document).ready(function () {
         .attr("width", 8)
         .attr("height", 8)
         .attr("fill", function(d, i) {
-          return colorScale(d.data[""]);
+          return colorScale_workers(d.data[""]);
         });
 
       legendG.append("text") // add the text
@@ -187,7 +187,7 @@ $(document).ready(function () {
           .join(function(enter){
             enter.append("path")
               .attr("class", "arc-pieworkers")
-              .attr('fill', function(d){ return(colorScale(d.data[""])) })
+              .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
               .attr("stroke", "white")
               .style("stroke-width", "2px")
               .style("opacity", 1)
@@ -214,7 +214,7 @@ $(document).ready(function () {
                     return arc(d);
                   }
                 })
-                .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1)
@@ -244,7 +244,7 @@ $(document).ready(function () {
           .attr("width", 8)
           .attr("height", 8)
           .attr("fill", function(d, i) {
-            return colorScale(d.data[""]);
+            return colorScale_workers(d.data[""]);
           });
 
         legendG.append("text") // add the text
@@ -319,7 +319,7 @@ $(document).ready(function () {
             .join(function(enter){
               enter.append("path")
                 .attr("class", "arc-pieworkers")
-                .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1)
@@ -346,7 +346,7 @@ $(document).ready(function () {
                       return arc(d);
                     }
                   })
-                  .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                  .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                   .attr("stroke", "white")
                   .style("stroke-width", "2px")
                   .style("opacity", 1)
@@ -376,7 +376,7 @@ $(document).ready(function () {
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
-              return colorScale(d.data[""]);
+              return colorScale_workers(d.data[""]);
             });
 
           legendG.append("text") // add the text
@@ -448,7 +448,7 @@ $(document).ready(function () {
             .join(function(enter){
               enter.append("path")
                 .attr("class", "arc-pieworkers")
-                .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1)
@@ -475,7 +475,7 @@ $(document).ready(function () {
                       return arc(d);
                     }
                   })
-                  .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                  .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                   .attr("stroke", "white")
                   .style("stroke-width", "2px")
                   .style("opacity", 1)
@@ -505,7 +505,7 @@ $(document).ready(function () {
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
-              return colorScale(d.data[""]);
+              return colorScale_workers(d.data[""]);
             });
 
           legendG.append("text") // add the text
@@ -580,7 +580,7 @@ $(document).ready(function () {
             .join(function(enter){
               enter.append("path")
                 .attr("class", "arc-pieworkers")
-                .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1)
@@ -607,7 +607,7 @@ $(document).ready(function () {
                       return arc(d);
                     }
                   })
-                  .attr('fill', function(d){ return(colorScale(d.data[""])) })
+                  .attr('fill', function(d){ return(colorScale_workers(d.data[""])) })
                   .attr("stroke", "white")
                   .style("stroke-width", "2px")
                   .style("opacity", 1)
@@ -637,7 +637,7 @@ $(document).ready(function () {
             .attr("width", 8)
             .attr("height", 8)
             .attr("fill", function(d, i) {
-              return colorScale(d.data[""]);
+              return colorScale_workers(d.data[""]);
             });
 
           legendG.append("text") // add the text
