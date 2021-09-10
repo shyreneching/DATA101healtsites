@@ -13,7 +13,7 @@ $(document).ready(function(){
         var sector = $('input[name="inlineRadioOptions"]:checked').val();
         var amenity = $("#select_amentity").val()
         var location = $("#select_province").val()
-        if((location  == "none" || location  == "ALL") && ($("#select_region").val() != "none" || $("#select_region").val() != "ALL")){
+        if((location  == null || location  == "ALL") && ($("#select_region").val() != null && $("#select_region").val() != "ALL")){
             location = "region_" + $("#select_region").val()
         }
 

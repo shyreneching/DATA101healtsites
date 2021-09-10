@@ -108,7 +108,7 @@ def get_number_workers_filtered(worker, sector, amenity, location):
 
     arr = ['Dentist', 'Doctor - Clinical', 'Medical Technologist', 'Midwife','Nurse', 'Nutritionist or Dietician','Occupational Therapist','Pharmacist','Physical Therapist','Radiologic Technologist','X-ray Technologist']
 
-    if worker != "none" and worker != "ALL":
+    if worker != "null" and worker != "ALL":
         arr = [worker]
 
     filtered_df = df[list(map(lambda x: sector + " - " + x, arr))].copy()
