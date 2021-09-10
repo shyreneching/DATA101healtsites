@@ -200,6 +200,71 @@ map.on('load', () => {
         popup.remove();
     });
 
+    function setLayersToInvisible(){
+        var arr1 = [
+            '', 
+            '_dentist', 
+            '_drclinical', 
+            '_mt',
+            '_midwife',
+            '_nurse',
+            '_n_d',
+            '_ot',
+            '_pharmacist',
+            '_pt',
+            '_rt',
+            '_xray',
+        ], arr2 = [
+            '',
+            '_public',
+            '_private'
+        ]
+
+        for (var i of arr1){
+            for (var j of arr2){
+                map.setLayoutProperty('healthworker'+i+j, 'visibility', 'none');
+            }
+        }
+    }
+
+    function filterMapWorker(){
+        var worker = $("#select_healthcare_worker_type").val()
+        var sector = $('input[name="inlineRadioOptions"]:checked').val();
+
+        setLayersToInvisible()
+        if (worker == null ||worker === 'ALL') {
+            if (sector === 'Total') {
+                map.setLayoutProperty('healthworker', 'visibility', 'visible');
+            } else if (sector === 'Private') {
+                map.setLayoutProperty('healthworker_private', 'visibility', 'visible');
+            } else if (sector === 'Public') {
+                map.setLayoutProperty('healthworker_public', 'visibility', 'visible');
+            }
+        } else if (worker == 'Doctor - Clinical') {
+          
+        } else if (worker === 'Medical Technologist') {
+            
+        } else if (worker === 'Midwife') {
+            
+        } else if (worker === 'Nutritionist or Dietician') {
+            
+        } else if (worker === 'Occupational Therapist') {
+            
+        } else if (worker === 'Pharmacist') {
+            
+        } else if (worker === 'Physical Therapist') {
+            
+        } else if (worker === 'Radiologic Technologist') {
+           
+        } else if (worker === 'X-ray Technologist') {
+           
+        } else if (worker === 'Dentist') {
+            
+        } else if (worker === 'Nurse') {
+            
+        }
+    }
+
     $('input[type=radio]').click(function () {
         const sect = this.value;
         console.log(sect)
@@ -221,29 +286,7 @@ map.on('load', () => {
 
     document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
         console.log('You selected: ', this.value);
-        if (this.value == 'ALL') {
-            
-        } else if (this.value == 'Doctor - Clinical') {
-          
-        } else if (this.value === 'Medical Technologist') {
-            
-        } else if (this.value === 'Midwife') {
-            
-        } else if (this.value === 'Nutritionist or Dietician') {
-            
-        } else if (this.value === 'Occupational Therapist') {
-            
-        } else if (this.value === 'Pharmacist') {
-            
-        } else if (this.value === 'Physical Therapist') {
-            
-        } else if (this.value === 'Radiologic Technologist') {
-           
-        } else if (this.value === 'X-ray Technologist') {
-           
-        } else if (this.value === 'Dentist') {
-            
-        }
+        
     });
 
     function titleCase(str) {
