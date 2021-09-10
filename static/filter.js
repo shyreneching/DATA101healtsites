@@ -144,4 +144,11 @@ $(document).ready(function() {
  };
 
 
+ $("#select_province").on('change', function(){
+  $('#select_region').prop('selectedIndex',0)
+ })
+
+ $("#select_region").on('change', function(){
+  $('#select_province').prop('selectedIndex',0)
+ })
 });
