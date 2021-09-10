@@ -1,8 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpa2EtY2hhbiIsImEiOiJja3J1YjE5NXMxMDA2Mm9tZmsyMjZpcjJ5In0.NvcmxedWpkjDDHd315UDRg';
 var tile_filter;
 const bounds = [
-    [103.047041, 4.267536], // Southwest coordinates
-    [139.578562, 20.830064] // Northeast coordinates
+    [104.047041, 4.267536], // Southwest coordinates
+    [139.578562, 20.870064] // Northeast coordinates
 ];
 
 var map = new mapboxgl.Map({
@@ -17,52 +17,6 @@ var map = new mapboxgl.Map({
 
 
 $(document).ready(function () {
-    $('input[type=radio]').click(function () {
-        const sect = this.value;
-        console.log(sect)
-        // update the map filter
-        if (sect === 'Total') {
-            tile_filter = ['!=', ['number', ['get', 'Total - Grand Total'], -1]];
-        } else if (sect === 'Private') {
-            tile_filter = ['!=', ['number', ['get', 'Private - Grand Total'], -1]];
-        } else if (sect === 'Public') {
-            tile_filter = ['!=', ['number', ['get', 'Public - Grand Total'], -1]];
-        } else {
-            console.log('error');
-        }
-        map.setFilter('healthworker', ['all', tile_filter]);
-    });
-
-
-    document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
-        console.log('You selected: ', this.value);
-        if (this.value == 'ALL') {
-            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Grand Total']], -2]);
-            // map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Grand Total']], -1]);
-            // tile_filter = ['!=', ['number', ['get', 'Total - Grand Total'], -1]];
-        } else if (this.value == 'Doctor - Clinical') {
-            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Doctor: Clinical']], -1]);
-        } else if (this.value === 'Medical Technologist') {
-            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Medical Technologist'], -3]]);
-        } else if (this.value === 'Midwife') {
-            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Midwife'], -4]]);
-            // } else if (this.value === 'Nutritionist or Dietician') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'Occupational Therapist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'Pharmacist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'Physical Therapist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'Radiologic Technologist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'X-ray Technologist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-            // } else if (this.value === 'Dentist') {
-            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
-        }
-        // map.setFilter('healthworker', ['all', tile_filter]);
-    });
 
     document.getElementById('select_amentity').addEventListener('change', function () {
         console.log('You selected: ', this.value);
@@ -95,8 +49,6 @@ $(document).ready(function () {
             map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
             map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
         }
-
-
     });
 });
 
@@ -155,6 +107,60 @@ map.on('load', () => {
         }
     }, 'waterway-label');
 
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_private',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Private - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_public',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Public - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
     const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -163,7 +169,6 @@ map.on('load', () => {
     map.on('mouseenter', 'healthsites', (e) => {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
-        // console.log(e.features[0].properties)
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
         var description = "<b>" + titleCase(e.features[0].properties.name) + "</b>" +
@@ -193,6 +198,52 @@ map.on('load', () => {
     map.on('mouseleave', 'healthsites', () => {
         map.getCanvas().style.cursor = '';
         popup.remove();
+    });
+
+    $('input[type=radio]').click(function () {
+        const sect = this.value;
+        console.log(sect)
+        // update the map filter
+        if (sect === 'Total') {
+            map.setLayoutProperty('healthworker', 'visibility', 'visible');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
+        } else if (sect === 'Private') {
+            map.setLayoutProperty('healthworker', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'visible');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'none');
+        } else if (sect === 'Public') {
+            map.setLayoutProperty('healthworker', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_private', 'visibility', 'none');
+            map.setLayoutProperty('healthworker_public', 'visibility', 'visible');
+        }
+    });
+
+    document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
+        console.log('You selected: ', this.value);
+        if (this.value == 'ALL') {
+            
+        } else if (this.value == 'Doctor - Clinical') {
+          
+        } else if (this.value === 'Medical Technologist') {
+            
+        } else if (this.value === 'Midwife') {
+            
+        } else if (this.value === 'Nutritionist or Dietician') {
+            
+        } else if (this.value === 'Occupational Therapist') {
+            
+        } else if (this.value === 'Pharmacist') {
+            
+        } else if (this.value === 'Physical Therapist') {
+            
+        } else if (this.value === 'Radiologic Technologist') {
+           
+        } else if (this.value === 'X-ray Technologist') {
+           
+        } else if (this.value === 'Dentist') {
+            
+        }
     });
 
     function titleCase(str) {
@@ -262,5 +313,304 @@ map.on('load', () => {
 
         return desc;
     }
+    
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_dentist',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Dentist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
 
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_doctor_clinical',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Doctor: Clinical'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_medical_technologist',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Medical Technologist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_midwife',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Midwife'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_nurse',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Nurse'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_n_d',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Nutritionist/ Dietician'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_ot',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Occupational Therapist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_pharmacist',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Pharmacist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_pt',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Physical Therapist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_rt',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Radiologic Technologist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    map.addLayer({
+        source: {
+            type: 'vector',
+            url: 'mapbox://shyreneching.3wjtx73g',
+        },
+        type: 'fill',
+        'id': 'healthworker_xray',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        'visibility': 'none',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - X-ray Technologist'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway-label');
+
+    
 });
