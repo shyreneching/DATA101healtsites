@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpa2EtY2hhbiIsImEiOiJja3J1YjE5NXMxMDA2Mm9tZmsyMjZpcjJ5In0.NvcmxedWpkjDDHd315UDRg';
-
+var tile_filter;
 const bounds = [
     [103.047041, 4.267536], // Southwest coordinates
     [139.578562, 20.830064] // Northeast coordinates
@@ -15,13 +15,98 @@ var map = new mapboxgl.Map({
     maxBounds: bounds
 });
 
+
+$(document).ready(function () {
+    $('input[type=radio]').click(function () {
+        const sect = this.value;
+        console.log(sect)
+        // update the map filter
+        if (sect === 'Total') {
+            tile_filter = ['!=', ['number', ['get', 'Total - Grand Total'], -1]];
+        } else if (sect === 'Private') {
+            tile_filter = ['!=', ['number', ['get', 'Private - Grand Total'], -1]];
+        } else if (sect === 'Public') {
+            tile_filter = ['!=', ['number', ['get', 'Public - Grand Total'], -1]];
+        } else {
+            console.log('error');
+        }
+        map.setFilter('healthworker', ['all', tile_filter]);
+    });
+
+
+    document.getElementById('select_healthcare_worker_type').addEventListener('change', function () {
+        console.log('You selected: ', this.value);
+        if (this.value == 'ALL') {
+            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Grand Total']], -2]);
+            // map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Grand Total']], -1]);
+            // tile_filter = ['!=', ['number', ['get', 'Total - Grand Total'], -1]];
+        } else if (this.value == 'Doctor - Clinical') {
+            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Doctor: Clinical']], -1]);
+        } else if (this.value === 'Medical Technologist') {
+            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Medical Technologist'], -3]]);
+        } else if (this.value === 'Midwife') {
+            map.setFilter('healthworker', ['!=', ['number', ['get', 'Total - Midwife'], -4]]);
+            // } else if (this.value === 'Nutritionist or Dietician') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'Occupational Therapist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'Pharmacist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'Physical Therapist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'Radiologic Technologist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'X-ray Technologist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+            // } else if (this.value === 'Dentist') {
+            //     map.setFilter('healthworker', ['!=', ['number', ['get', 'Public - Grand Total'], -1]]);
+        }
+        // map.setFilter('healthworker', ['all', tile_filter]);
+    });
+
+    document.getElementById('select_amentity').addEventListener('change', function () {
+        console.log('You selected: ', this.value);
+        if (this.value == "ALL") {
+            map.setFilter('healthsites', ['!=', ['string', ['get', 'amenity']], this.value]);
+        } else {
+            map.setFilter('healthsites', ['==', ['string', ['get', 'amenity']], this.value]);
+        }
+
+    });
+
+    document.getElementById('select_province').addEventListener('change', function () {
+        console.log('You selected: ', this.value);
+        if (this.value == "ALL") {
+            map.setFilter('healthsites', ['!=', ['string', ['get', 'province']], this.value]);
+            map.setFilter('healthworker', ['!=', ['string', ['get', 'Province']], this.value]);
+        } else {
+            map.setFilter('healthsites', ['==', ['string', ['get', 'province']], this.value]);
+            map.setFilter('healthworker', ['==', ['string', ['get', 'Province']], this.value]);
+        }
+    });
+
+    document.getElementById('select_region').addEventListener('change', function () {
+        console.log('You selected: ', this.value);
+
+        if (this.value == "ALL") {
+            map.setFilter('healthsites', ['!=', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker', ['!=', ['string', ['get', 'Region']], this.value]);
+        } else {
+            map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
+            map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
+        }
+
+
+    });
+});
+
 map.on('load', () => {
     map.addSource('sites', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/shyreneching/DATA101healtsites/main/data/healthsites.geojson'
     });
 
-    
+
     map.addLayer({
         id: 'healthsites',
         type: 'circle',
@@ -56,14 +141,15 @@ map.on('load', () => {
             'fill-color': [
                 'interpolate',
                 ['linear'],
-                ['get', 'Total - Grand Total'],
-                    0, '#ffffff',
-                    1000, '#fed8d8',
-                    5000, '#f07272',
-                    7000, '#e71414',
-                    10000, '#960b0b',
-                    12000, '#650b0b',
-                    32000, '#600101',
+                ['number', ['get', 'Total - Grand Total']],
+                // ['get', 'Total - Grand Total'],
+                0, '#ffffff',
+                1000, '#fed8d8',
+                5000, '#f07272',
+                7000, '#e71414',
+                10000, '#960b0b',
+                20000, '#650b0b',
+                32000, '#600101',
             ],
             'fill-outline-color': '#777777'
         }
@@ -104,7 +190,7 @@ map.on('load', () => {
         popup.setLngLat(coordinates).setHTML(description).addTo(map);
     });
 
-    map.on('mouseleave', 'places', () => {
+    map.on('mouseleave', 'healthsites', () => {
         map.getCanvas().style.cursor = '';
         popup.remove();
     });
@@ -122,8 +208,6 @@ map.on('load', () => {
 
     function long_desc(e) {
         var desc = "";
-
-
         if (e.features[0].properties.opening_hours != "") {
             desc = desc + "<br>Opening Hours: " + e.features[0].properties.opening_hours;
         }
