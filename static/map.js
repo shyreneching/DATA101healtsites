@@ -294,10 +294,6 @@ map.on('load', () => {
     }
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_dentist',
         'source': 'workers',
@@ -321,10 +317,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_drclinical',
         'source': 'workers',
@@ -348,10 +340,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_mt',
         'source': 'workers',
@@ -375,10 +363,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_midwife',
         'source': 'workers',
@@ -402,10 +386,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_nurse',
         'source': 'workers',
@@ -430,10 +410,6 @@ map.on('load', () => {
 
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_n_d',
         'source': 'workers',
@@ -457,10 +433,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_ot',
         'source': 'workers',
@@ -484,10 +456,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_pharmacist',
         'source': 'workers',
@@ -511,10 +479,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_pt',
         'source': 'workers',
@@ -538,10 +502,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_rt',
         'source': 'workers',
@@ -565,10 +525,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_xray',
         'source': 'workers',
@@ -592,10 +548,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_dentist',
         'source': 'workers',
@@ -619,10 +571,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_drclinical',
         'source': 'workers',
@@ -646,10 +594,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_mt',
         'source': 'workers',
@@ -673,10 +617,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_midwife',
         'source': 'workers',
@@ -700,10 +640,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_nurse',
         'source': 'workers',
@@ -728,10 +664,6 @@ map.on('load', () => {
 
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_n_d',
         'source': 'workers',
@@ -755,10 +687,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_ot',
         'source': 'workers',
@@ -782,10 +710,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_pharmacist',
         'source': 'workers',
@@ -809,10 +733,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_pt',
         'source': 'workers',
@@ -836,10 +756,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_rt',
         'source': 'workers',
@@ -863,10 +779,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private_xray',
         'source': 'workers',
@@ -890,10 +802,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_dentist',
         'source': 'workers',
@@ -917,10 +825,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_drclinical',
         'source': 'workers',
@@ -944,10 +848,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_mt',
         'source': 'workers',
@@ -971,10 +871,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_midwife',
         'source': 'workers',
@@ -998,10 +894,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_nurse',
         'source': 'workers',
@@ -1026,10 +918,6 @@ map.on('load', () => {
 
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_n_d',
         'source': 'workers',
@@ -1053,10 +941,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_ot',
         'source': 'workers',
@@ -1080,10 +964,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_pharmacist',
         'source': 'workers',
@@ -1107,10 +987,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_pt',
         'source': 'workers',
@@ -1134,10 +1010,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_rt',
         'source': 'workers',
@@ -1161,10 +1033,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public_xray',
         'source': 'workers',
@@ -1188,10 +1056,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_private',
         'source': 'workers',
@@ -1215,10 +1079,6 @@ map.on('load', () => {
     }, 'waterway-label');
 
     map.addLayer({
-        source: {
-            type: 'vector',
-            url: 'mapbox://shyreneching.3wjtx73g',
-        },
         type: 'fill',
         'id': 'healthworker_public',
         'source': 'workers',
@@ -1266,7 +1126,4 @@ map.on('load', () => {
             'fill-outline-color': '#777777'
         }
     }, 'waterway-label');
-
-    
-    
 });
