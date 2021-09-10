@@ -25,43 +25,16 @@ $(document).ready(function () {
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'amenity']], this.value]);
         }
-
     });
 
     document.getElementById('select_province').addEventListener('change', function () {
         console.log('You selected: ', this.value);
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'province']], this.value]);
-            map.setFilter('healthworker', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_private', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_public', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_midwife', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_nurse', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_n_d', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_ot', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_pharmacist', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_pt', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_rt', ['!=', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_xray', ['!=', ['string', ['get', 'Province']], this.value]);
+            filterLayers('!=', 'Province', this.value)
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'province']], this.value]);
-            map.setFilter('healthworker', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_private', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_public', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_midwife', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_nurse', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_n_d', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_ot', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_pharmacist', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_pt', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_rt', ['==', ['string', ['get', 'Province']], this.value]);
-            map.setFilter('healthworker_xray', ['==', ['string', ['get', 'Province']], this.value]);
+            filterLayers('==', 'Province', this.value)
         }
     });
 
@@ -70,39 +43,40 @@ $(document).ready(function () {
 
         if (this.value == "ALL") {
             map.setFilter('healthsites', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_private', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_public', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_dentist', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_drclinical', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_mt', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_midwife', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_nurse', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_n_d', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_ot', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_pharmacist', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_pt', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_rt', ['!=', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_xray', ['!=', ['string', ['get', 'Region']], this.value]);
+            filterLayers('!=', 'Region', this.value)
         } else {
             map.setFilter('healthsites', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_private', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_public', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_dentist', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_drclinical', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_mt', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_midwife', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_nurse', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_n_d', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_ot', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_pharmacist', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_pt', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_rt', ['==', ['string', ['get', 'Region']], this.value]);
-            map.setFilter('healthworker_xray', ['==', ['string', ['get', 'Region']], this.value]);
+            filterLayers('==', 'Region', this.value)
         }
     });
 });
+
+function filterLayers(conditional, filter, value){
+    var arr1 = [
+        '', 
+        '_dentist', 
+        '_drclinical', 
+        '_mt',
+        '_midwife',
+        '_nurse',
+        '_n_d',
+        '_ot',
+        '_pharmacist',
+        '_pt',
+        '_rt',
+        '_xray',
+    ], arr2 = [
+        '',
+        '_public',
+        '_private'
+    ]
+
+    for (var i of arr1){
+        for (var j of arr2){
+            map.setFilter('healthworker'+j+i, [conditional, ['string', ['get', filter]], value]);
+        }
+    }
+}
 
 map.on('load', () => {
     map.addSource('sites', {
