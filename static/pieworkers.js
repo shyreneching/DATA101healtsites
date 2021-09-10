@@ -2,6 +2,20 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var colors = [
+  '#574a3a',
+  '#e7c9a7',
+  '#156564',
+  '#786288',
+  '#f8f3dd',
+  '#c0af93',
+  '#d4cad5',
+  '#175967',
+  '#3d5257',
+  '#e9954d',
+  '#7c8f9e'
+]
+
 $(document).ready(function () {
     /////////////////////////
     // FOR PIE CHART SITES //
@@ -26,7 +40,7 @@ $(document).ready(function () {
       inFlag = false
 
       var keys = [...new Set(data.map(function(d) { return d[""]; }))];
-      colorScale = d3.scaleOrdinal(keys, d3.schemeCategory10);
+      colorScale = d3.scaleOrdinal(keys, colors);
 
       var arc = d3.arc()
           .innerRadius(50)
