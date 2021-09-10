@@ -6,13 +6,13 @@ $(document).ready(function () {
     /////////////////////////
     // FOR PIE CHART SITES //
     /////////////////////////
-  
+
     const pie_width = 200;
     const pie_height = 200;
     const radius = Math.min(pie_width, pie_height) / 2;
 
     var colorScale, inFlag = false;
-  
+
     // Creates sources <svg> element
     var pie_sites = d3.select("#pie_typesofhealthworkers")
       .append("svg")
@@ -20,14 +20,14 @@ $(document).ready(function () {
       .attr("height", pie_height)
       .append("g")
       .attr("transform", `translate(${pie_width / 2}, ${pie_height / 2})`);
-  
+
     d3.csv('/pieworkersdata').then(function (data) {
 
       inFlag = false
 
-      keys = [...new Set(data.map(function(d) { return d[""]; }))];  
+      keys = [...new Set(data.map(function(d) { return d[""]; }))];
       colorScale = d3.scaleOrdinal(keys, d3.schemeCategory10);
-  
+
       var tooltip = d3.select("#pie_typesofhealthworkers")
         .append("div")
         .style("display", "none")
@@ -43,7 +43,7 @@ $(document).ready(function () {
           tooltip
               .style("display", "")
               .style("opacity", 1)
-              .html("<h6>" + d.data[""].toUpperCase() + 
+              .html("<h6>" + d.data[""].toUpperCase() +
                   "</h6>Total Count: " + numberWithCommas(d.data["total"]))
               .style("right", (window.innerWidth - event.pageX - 100) + "px")
               .style("top", (event.pageY - 200) + "px")
@@ -63,7 +63,7 @@ $(document).ready(function () {
               .style("opacity", 0)
               .style("display", "none")
       }
-  
+
       var pie = d3.pie()
         .value(function (d) {return d["total"];});
 
@@ -72,7 +72,7 @@ $(document).ready(function () {
         .join("path")
         .attr("class", "arc-piesites")
         .attr('d', d3.arc()
-          .innerRadius(0)
+          .innerRadius(50)
           .outerRadius(radius - 10)
         )
         .attr('fill', function(d){ return(colorScale(d.data[""])) })

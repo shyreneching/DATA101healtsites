@@ -86,7 +86,7 @@ p {
 }
 
 #map_filter_options {
-  width: 25%;
+  width: 20%;
   height: 40%;
   position: absolute;
   z-index: 99;
@@ -100,6 +100,10 @@ p {
 .show {
   background-color: #B17474 !important;
   color: white !important;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
 .accordion-button.collapsed {
@@ -132,7 +136,7 @@ p {
   background-color: #DBA9A9;
   font-family: 'Montserrat', sans-serif;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   height: 40px;
   width: inherit;
@@ -143,7 +147,7 @@ p {
 #filter_item {
   padding: 10px;
   width: inherit;
-  font-size: 10px;
+  font-size: 12px;
   background-color: white;
   color: #B17474;
   border-bottom: 0.2px solid #DBA9A9;
