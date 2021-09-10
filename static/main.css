@@ -74,7 +74,7 @@ p {
 
 #second_row {
   /* background-color: white; */
-  min-height: 80%;
+  min-height: 650px;
   margin: 0px 10px 10px 10px;
 }
 
@@ -223,7 +223,7 @@ option,
 
 #footer {
   position: relative;
-  
+
   bottom: 0;
   background-color: #DBA9A9;
   color: #464646;
