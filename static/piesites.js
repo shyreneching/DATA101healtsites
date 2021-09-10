@@ -82,5 +82,28 @@ $(document).ready(function () {
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
+
+      var legendG = pie_sites.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
+        .data(pie(data))
+        .enter().append("g")
+        .attr("transform", function(d,i){
+          return "translate(" + (-10) + "," + (i * 15 - 80) + ")"; // place each legend on the right and bump each one down 15 pixels
+        })
+        .attr("class", "legend");   
+      
+      legendG.append("rect") // make a matching color rect
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill", function(d, i) {
+          return colorScale(d.data[""]);
+        });
+      
+      legendG.append("text") // add the text
+        .text(function(d){
+          return d.value + "  " + d.data[""];
+        })
+        .style("font-size", 12)
+        .attr("y", 10)
+        .attr("x", 11);
     });
   });
