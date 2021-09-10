@@ -7,7 +7,7 @@ $(document).ready(function () {
     // FOR PIE CHART SITES //
     /////////////////////////
 
-    const pie_width = 200;
+    const pie_width = 350;
     const pie_height = 200;
     const radius = Math.min(pie_width, pie_height) / 2;
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
       .attr("width", pie_width)
       .attr("height", pie_height)
       .append("g")
-      .attr("transform", `translate(${pie_width / 2}, ${pie_height / 2})`);
+      .attr("transform", `translate(${(pie_width - 150) / 2}, ${pie_height / 2})`);
 
     d3.csv('/pieworkersdata').then(function (data) {
 
@@ -82,5 +82,31 @@ $(document).ready(function () {
         .on("mouseover", showTooltip)
         .on("mousemove", moveTooltip)
         .on("mouseleave", hideTooltip)
+
+      var legendG = pie_sites.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
+        .data(pie(data))
+        .enter().append("g")
+        .attr("transform", function(d,i){
+          return "translate(" + (pie_width - 240) + "," + (i * 15 - 85) + ")"; // place each legend on the right and bump each one down 15 pixels
+        })
+        .attr("class", "legend")
+        .on("mouseover", showTooltip)
+        .on("mousemove", moveTooltip)
+        .on("mouseleave", hideTooltip)
+      
+      legendG.append("rect") // make a matching color rect
+        .attr("width", 8)
+        .attr("height", 8)
+        .attr("fill", function(d, i) {
+          return colorScale(d.data[""]);
+        });
+      
+      legendG.append("text") // add the text
+        .text(function(d){
+          return d.data[""].toUpperCase();
+        })
+        .style("font-size", 8)
+        .attr("y", 8)
+        .attr("x", 13);
     });
   });
