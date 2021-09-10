@@ -111,9 +111,19 @@ def get_number_workers_filtered(worker, sector, amenity, location):
     if worker != "null" and worker != "ALL":
         arr = [worker]
 
-    filtered_df = df[list(map(lambda x: sector + " - " + x, arr))].copy()
-    filtered_df.columns = arr.copy()
+    filtered_df = df[['Region', 'Province'] + list(map(lambda x: sector + " - " + x, arr))].copy()
+    filtered_df.columns = ['region', 'province'] + arr.copy()
 
+    if location != "null" and location != "ALL":
+        if location.startswith('region_'):
+            location = location[7:]
+            print(location)
+            filtered_df = filtered_df[filtered_df['region'] == location]
+        else:
+            filtered_df = filtered_df[filtered_df['province'] == location]
+
+    filtered_df=filtered_df[arr].copy()
+    filtered_df.columns = arr.copy()
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[[-1]]
 
@@ -127,6 +137,34 @@ def get_number_sites():
     filtered_df = df[['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']].copy()
     filtered_df.columns = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
 
+    filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
+    filtered_df=filtered_df.iloc[[-1]]
+
+    # return Response(filtered_df.to_json(), mimetype="application/json")
+    return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numsites.csv"})
+
+@app.route('/numsites/<worker>/<sector>/<amenity>/<location>')
+def get_number_sites_filtered(worker, sector, amenity, location):
+    df = pd.read_csv(actual_data_url)
+
+    arr = ['clinic', 'dentist', 'doctors', 'healthcare','hospital', 'laboratory','pharmacy','social facility','others']
+
+    if amenity != "null" and amenity != "ALL":
+        arr = [amenity]
+
+    filtered_df = df[['Region', 'Province'] + arr.copy()].copy()
+    filtered_df.columns = ['region', 'province'] + arr.copy()
+
+    if location != "null" and location != "ALL":
+        if location.startswith('region_'):
+            location = location[7:]
+            print(location)
+            filtered_df = filtered_df[filtered_df['region'] == location]
+        else:
+            filtered_df = filtered_df[filtered_df['province'] == location]
+
+    filtered_df=filtered_df[arr].copy()
+    filtered_df.columns = arr.copy()
     filtered_df=filtered_df.append(filtered_df.sum().rename('total'))
     filtered_df=filtered_df.iloc[[-1]]
 
