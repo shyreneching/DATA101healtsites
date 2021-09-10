@@ -23,12 +23,11 @@ map.on('load', () => {
         data: 'https://raw.githubusercontent.com/shyreneching/DATA101healtsites/main/data/healthsites.geojson'
     });
 
-    map.addSource('workers', {
-        type: 'geojson',
-        data: 'mapbox://shyreneching.3wjtx73g'
-    });
+    // map.addSource('workers', {
+    //     type: 'vector',
+    //     data: 'mapbox://shyreneching.3wjtx73g'
+    // });
     
-
     map.addLayer({
         id: 'healthsites',
         type: 'circle',
@@ -48,33 +47,58 @@ map.on('load', () => {
         },
     });
 
+    // map.addLayer({
+    //         'id': 'healthworker',
+    //         'source': 'workers',
+    //         'source-layer': 'healthworkers-86lyvc',
+    //         'type': 'fill',
+    //         paint: {
+    //             'fill-color': [
+    //                 'interpolate',
+    //                 ['linear'],
+    //                 ['get', 'Total - Grand Total'],
+    //                 0, '#ffffff',
+    //                 1000, '#fed8d8',
+    //                 5000, '#f07272',
+    //                 7000, '#e71414',
+    //                 10000, '#960b0b',
+    //                 12000, '#650b0b',
+    //                 32000, '#600101',
+    //                 // 1397715000, '#005824',
+    //             ],
+    //             'fill-outline-color': '#777777'
+    //         }
+    //     },
+    //     'waterway'
+    // );
+
+    map.addSource('workers', {
+        type: 'vector',
+        url: 'mapbox://shyreneching.3wjtx73g',
+    });
+
     map.addLayer({
-            'id': 'healthworker',
-            'source': 'workers',
-            'source-layer': 'healthworkers-86lyvc',
-            'type': 'fill',
-            // only include features for which the "isState"
-            // // property is "true"
-            // 'filter': ['==', 'isState', true],
-            paint: {
-                'fill-color': [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'Total - Grand Total'],
+
+        type: 'fill',
+        'id': 'healthworker',
+        'source': 'workers',
+        'source-layer': 'healthworkers-86lyvc',
+        paint: {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'Total - Grand Total'],
                     0, '#ffffff',
-                    11646, '#edf8fb',
-                    174725666, '#ccece6',
-                    349437485, '#99d8c9',
-                    698863323, '#66c2a4',
-                    873576243, '#41ae76',
-                    1048289162, '#238b45',
-                    1397715000, '#005824',
-                ],
-                'fill-outline-color': '#777777'
-            }
-        },
-        'waterway-label'
-    );
+                    1000, '#fed8d8',
+                    5000, '#f07272',
+                    7000, '#e71414',
+                    10000, '#960b0b',
+                    12000, '#650b0b',
+                    32000, '#600101',
+            ],
+            'fill-outline-color': '#777777'
+        }
+    }, 'waterway');
 
     const popup = new mapboxgl.Popup({
         closeButton: false,
