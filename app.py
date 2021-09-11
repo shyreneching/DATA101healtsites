@@ -254,3 +254,4 @@ def get_hierarchical_bar():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
