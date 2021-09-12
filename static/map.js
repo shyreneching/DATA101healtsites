@@ -51,17 +51,36 @@ $(document).ready(function () {
     });
 });
 
-function filterLocAmenity(){
-    var region = $("#select_region").val()
-    var province = $("#select_province").val()
-    var amenity = $("#select_amentity").val()
+function filterLocAmenity(amenity, location, boolRegion){
 
-    if(amenity == 'ALL' && (province == 'ALL' || region == 'ALL')){
-        map.setFilter('healthsites', ["all",['!=', ['string', ['get', 'amenity']], amenity], ['!=', ['string', ['get', 'province']], province], ['!=', ['string', ['get', 'Region']], province]]);
-        filterLayers('!=', 'Province', province);
-        filterLayers('!=', 'Region', province);
-    } else if (amenity != 'ALL' && (province == 'ALL' || region == 'ALL')){
+    if((amenity == null || amenity == "ALL") && (location == null || location == "ALL")){
+        amenity = "ALL"
+        location = "ALL"
 
+        map.setFilter('healthsites', ["all",['!=', ['string', ['get', 'amenity']], amenity], ['!=', ['string', ['get', 'province']], location], ['!=', ['string', ['get', 'Region']], location]]);
+        filterLayers('!=', 'Province', location);
+        filterLayers('!=', 'Region', location);
+    } else if ((amenity != null && amenity != "ALL") && (location != null && location != "ALL")){
+        amenity = amenity
+        location = location
+
+        if(boolRegion){
+
+        } else {
+
+        }
+    } else if (amenity == null || amenity == "ALL"){
+        amenity = "ALL"
+        location = location
+
+        if(boolRegion){
+
+        } else {
+            
+        }
+    } else if (location == null || location == "ALL"){
+        amenity = amenity
+        location = "ALL"
     }
 }
 
