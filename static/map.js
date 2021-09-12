@@ -20,11 +20,11 @@ $(document).ready(function () {
 
     document.getElementById('select_amentity').addEventListener('change', function () {
         console.log('You selected: ', this.value);
-        
+
         if ($("#select_region").val() != null && $("#select_region").val() != "ALL") {
-            filterLocAmenity(this.value, $("#select_region").val(), true)       
+            filterLocAmenity(this.value, $("#select_region").val(), true)
         } else {
-            filterLocAmenity(this.value, $("#select_province").val(), false)   
+            filterLocAmenity(this.value, $("#select_province").val(), false)
         }
     });
 
@@ -84,9 +84,9 @@ function filterLocAmenity(amenity, location, boolRegion){
 
 function filterLayers(conditional, filter, value){
     var arr1 = [
-        '', 
-        '_dentist', 
-        '_drclinical', 
+        '',
+        '_dentist',
+        '_drclinical',
         '_mt',
         '_midwife',
         '_nurse',
@@ -140,7 +140,7 @@ map.on('load', () => {
         url: 'mapbox://shyreneching.3wjtx73g',
     });
 
-    
+
 
     const popup = new mapboxgl.Popup({
         closeButton: false,
@@ -153,7 +153,7 @@ map.on('load', () => {
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
         var description = "<b>" + titleCase(e.features[0].properties.name) + "</b>" +
-            "<br>Amenity: " + titleCase(e.features[0].properties.amenity) +
+            "<br>Facility: " + titleCase(e.features[0].properties.amenity) +
             // "<br>Amenity: " + titleCase(e.features[0].properties.addr_housenumber) +" "+ titleCase(e.features[0].properties.addr_city) +
             "<br>Region: " + e.features[0].properties.Region +
             "<br>Province: " + e.features[0].properties.province +
@@ -183,9 +183,9 @@ map.on('load', () => {
 
     function setLayersToInvisible(){
         var arr1 = [
-            '', 
-            '_dentist', 
-            '_drclinical', 
+            '',
+            '_dentist',
+            '_drclinical',
             '_mt',
             '_midwife',
             '_nurse',
