@@ -17,6 +17,9 @@ https://ph-healthsites-healthworkers.herokuapp.com/
 - VILLAROMAN, Ma. Patricia
 
 ## Setup instructions (how to run the application locally)
+Python must be installed on the local terminal with the path appropriately set.
+
+Aditional dependencies must installed for the program to work
 ```
 $ pip install Flask
 $ pip install pandas
