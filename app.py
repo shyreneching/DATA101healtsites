@@ -1,5 +1,6 @@
 from flask import Flask, Response
 import pandas as pd
+import json
 
 app = Flask(__name__)
 
@@ -226,6 +227,45 @@ def get_number_sites_filtered(worker, sector, amenity, location):
 
     # return Response(filtered_df.to_json(), mimetype="application/json")
     return Response(filtered_df.sum(axis=1).to_csv(), mimetype="text/csv", headers={"Content-disposition": "attachment; filename=numsites.csv"})
+
+@app.route('/hierarchicaldata')
+def get_hierarchical_regional_data():
+    df = pd.read_csv(actual_data_url)
+    
+    filtered_df = df[['Region', 
+        'Province', 
+        'pharmacy', 
+        'clinic', 
+        'hospital', 
+        'dentist', 
+        'doctors', 
+        'laboratory', 
+        'social facility', 
+        'healthcare']].copy()
+
+    regions = filtered_df['Region'].unique()
+    hierarchical_data = {"name": "hierarchical", "children": []}
+
+    # for each region
+    for region in regions:
+        region_provinces = filtered_df.loc[df['Region'] == region]['Province'].unique()
+        r_level = {"name": region, "children": []}
+
+        for province in region_provinces:
+            p_level = {"name": province, "children": []}
+
+            province_ammenties = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social facility', 'healthcare']
+            for ammenity in province_ammenties:
+                #a_series = filtered_df.loc[df['Province'] == province][ammenity]
+                a_list = filtered_df.loc[df['Province'] == province][ammenity].to_list()
+                a_value = a_list[0]
+                p_level["children"].append({"name": ammenity, "value": a_value})
+
+            r_level["children"].append(p_level)
+        hierarchical_data["children"].append(r_level)
+    
+    json_string = json.dumps(hierarchical_data)
+    return Response(json_string, mimetype="text/json", headers={"Content-disposition": "attachment; filename=hierarchical.json"})
 
 # STATIC PAGES
 # @app.route('/about')
