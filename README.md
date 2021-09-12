@@ -11,9 +11,11 @@ With the insufficiency of health care, health workers, and facilities highlighte
 
 #### Target Users
 - Govermentt Officers
+
 To quickly see the number of medical sites and medical workers in a specific area and analyze their relation to one another to gain more insights
 
 - Filipinos
+
 To see the medical sites around the Philippines and increase awareness on the scarcity of facilities or workers around their area
 
 #### Problem Being Solved
