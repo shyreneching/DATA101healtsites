@@ -7,7 +7,8 @@ https://ph-healthsites-healthworkers.herokuapp.com/
 A dashboard that reports the number and type of health workers and health sites in the Philippines.
 
 #### Motivation
-With the insufficiency of health care, health workers, and facilities highlighted by the ongoing pandemic, as well as the discovered trend of health professionals exporting labor leaving a great disparity of healthcare worker-to-patient ratio and availability between urban and rural areas, the rising concern of this scarcity in the healthcare system has motivated us to visualize the locations of the available healthcare workers and facilities to aid both the government and fellow Filipinos in easily locating them as well as being more aware of the issue. 
+With the insufficiency of health care, health workers, and facilities highlighted by the ongoing pandemic, as well as the discovered trend of health professionals exporting labor leaving a great disparity of healthcare worker-to-patient ratio and availability between urban and rural areas, the rising concern of this scarcity in the healthcare system has motivated us to visualize the locations of the available healthcare workers and facilities to aid both the government and fellow Filipinos in easily locating them as well as being more aware of the issue. The local government units and DOH can visualise the locations of the medical sites and workers in a specific area and study their relations to one another to gain more insights, while fellow Filipinos can easily see their nearest health facilities or be more aware of the scarcity of our healthcare workers and facilities all over the country.
+
 
 #### Target Users
 - Govermentt Officers
