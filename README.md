@@ -1,6 +1,5 @@
-# DATA101healtsites
-
 # Philippine Health Dashboard
+
 ## Link to the application
 https://ph-healthsites-healthworkers.herokuapp.com/
 
@@ -18,3 +17,4 @@ https://ph-healthsites-healthworkers.herokuapp.com/
 - VILLAROMAN, Ma. Patricia
 
 ## Setup instructions (how to run the application locally)
+```pip install flask```
