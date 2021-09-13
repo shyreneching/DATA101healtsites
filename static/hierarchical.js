@@ -1,5 +1,5 @@
-var width;
-var height;
+var bar_width;
+var bar_height;
 var barStep = 17;
 var barPadding = 3 / barStep;
 var data;
@@ -8,42 +8,41 @@ var color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"])
 var duration = 750,
     delay = 25;
 var x, y;
-var margin;
+var bar_margin;
 var svg;
-var d;
+var base_data;
+var hierarchical_filters;
+var amenity_list = amenity_list = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social-facility', 'healthcare'];
 
 d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     data = hierarchicaldata;
-    d = data;
+    base_data = hierarchicaldata;
     console.log(data);
 
-    root = d3.hierarchy(data)
-    .sum(d => d.value)
-    .sort((a, b) => b.value - a.value)
-    .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
+    root = setRoot(data);
 
-    margin = {top: 10, right: 20, bottom: 20, left: 150},
-    width = 600 - margin.left - margin.right,
-    height = 360 - margin.top - margin.bottom;
+    bar_margin = {top: 10, right: 20, bottom: 20, left: 150},
+    bar_width = 600 - bar_margin.left - bar_margin.right,
+    bar_height = 360 - bar_margin.top - bar_margin.bottom;
 
-    x = d3.scaleLinear().range([margin.left, width - margin.right])
+    x = d3.scaleLinear().range([bar_margin.left, bar_width - bar_margin.right])
 
     svg = d3.select("#hierarchical").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height)
+        .attr("width", bar_width + bar_margin.left + bar_margin.right)
+        .attr("height", bar_height)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + bar_margin.left + "," + bar_margin.top + ")");
 
     svg.append("rect")
     .attr("class", "background")
     .attr("fill", "none")
     .attr("pointer-events", "all")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", bar_width)
+    .attr("height", bar_height)
     .attr("cursor", "pointer")
     .on("click", (event, d) => up(svg, d));
 
-    console.log("height" + height);
+    console.log("height" + bar_height);
 
     svg.append("g")
     .call(xAxis);
@@ -57,17 +56,17 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
 
 var xAxis = g => g
         .attr("class", "x-axis")
-        .attr("transform", `translate(0,${margin.top})`)
-        .call(d3.axisTop(x).ticks(width / 80, "s"))
+        .attr("transform", `translate(0,${bar_margin.top})`)
+        .call(d3.axisTop(x).ticks(bar_width / 80, "s"))
         .call(g => (g.selection ? g.selection() : g).select(".domain").remove())
 
 var yAxis = g => g
     .attr("class", "y-axis")
-    .attr("transform", `translate(${margin.left + 0.5},0)`)
+    .attr("transform", `translate(${bar_margin.left + 0.5},0)`)
     .call(g => g.append("line")
         .attr("stroke", "currentColor")
-        .attr("y1", margin.top)
-        .attr("y2", height - margin.bottom))
+        .attr("y1", bar_margin.top)
+        .attr("y2", bar_height - bar_margin.bottom))
 
 var end, exit, enter, enterTransition, exitTransition
 
@@ -75,7 +74,7 @@ var end, exit, enter, enterTransition, exitTransition
 function bar(svg, down, d, selector) {
     const g = svg.insert("g", selector)
         .attr("class", "enter")
-        .attr("transform", `translate(0,${margin.top + barStep * barPadding})`)
+        .attr("transform", `translate(0,${bar_margin.top + barStep * barPadding})`)
         .attr("text-anchor", "end")
         .style("font", "10px sans-serif");
   
@@ -86,7 +85,7 @@ function bar(svg, down, d, selector) {
         .on("click", (event, d) => down(svg, d));
   
     bar.append("text")
-        .attr("x", margin.left - 6)
+        .attr("x", bar_margin.left - 6)
         .attr("y", barStep * (1 - barPadding) / 2)
         .attr("dy", ".35em")
         .text(d => {
@@ -249,3 +248,57 @@ function stagger() {
       return t;
     };
 }
+
+function setRoot (d) {
+    return d3.hierarchy(d)
+    .sum(d => d.value)
+    .sort((a, b) => b.value - a.value)
+    .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
+}
+
+function filterAmenityData (hierarchicalTree) {
+    const new_data = [];
+    for (const parent of hierarchicalTree) {
+        if (hierarchical_filters.includes(parent.name)) {
+            continue;
+        } else if (parent.children) {
+            new_data.push({
+                ...parent,
+                children: filterAmenityData(parent.children)
+            });
+        } else {
+            new_data.push(parent);
+        }
+    }
+    return new_data;
+}
+
+function filterHierarchicalChart () {
+    hierarchical_filters = [];
+
+    for (i in amenity_list) {
+        if (document.getElementById("cb-"+amenity_list[i]).checked === false) {
+            hierarchical_filters.push(amenity_list[i]);
+        }
+    }
+
+    root = setRoot(filterAmenityData([base_data])[0])
+    x.domain([0, root.value]).nice();
+    down(svg, root);
+};
+
+function resetHierarchicalChart () {
+    root = setRoot(base_data);
+    x.domain([0, root.value]).nice();
+    down(svg, root);
+
+    for (i in amenity_list) {
+        document.getElementById("cb-"+amenity_list[i]).checked = true;
+    }
+}
+
+// When the button is clicked, run the filterHierarchicalChart function
+document.getElementById("btn-filter-hierarchical").onclick = filterHierarchicalChart;
+
+// When the button is clicked, run the resetHierarchicalChart function
+document.getElementById("btn-reset-hierarchical").onclick = resetHierarchicalChart;
