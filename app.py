@@ -220,11 +220,10 @@ def get_hierarchical_regional_data():
             p_level = {"name": province, "children": []}
 
             province_ammenties = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social facility', 'healthcare']
-            for ammenity in province_ammenties:
-                #a_series = filtered_df.loc[df['Province'] == province][ammenity]
-                a_list = filtered_df.loc[df['Province'] == province][ammenity].to_list()
+            for amenity in province_ammenties:
+                a_list = filtered_df.loc[df['Province'] == province][amenity].to_list()
                 a_value = a_list[0]
-                p_level["children"].append({"name": ammenity, "value": a_value})
+                p_level["children"].append({"name": amenity, "value": a_value})
 
             r_level["children"].append(p_level)
         hierarchical_data["children"].append(r_level)
