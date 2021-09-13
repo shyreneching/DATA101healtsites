@@ -133,10 +133,65 @@
     </div>
     <div class="row h-25" id="second_row">
 
-      <div class="col col-7.5 shadow-sm px-3 pt-3 pb-0 mb-2 my-2 me-2 bg-white rounded" id="num_healthsites_per_region">
+      <div id="num_healthsites_per_region" class="col col-7.5 shadow-sm px-3 pt-3 pb-0 mb-2 my-2 me-2 bg-white rounded">
         <h6>Number of Healthsites and Ammenities per Region / Province</h6>
         <p style='font-size:12px; color:gray; margin-bottom:1em'>Click on a bar to see the breakdown for each province or region. Click on other areas of the chart to return to the previous view.</p>
-        <div id="hierarchical"></div>
+        <div class="row" id="hierarchical"></div>
+        <div class="row" id="hierarchical-filter">
+          <label class="filter-label" style="color: #9e2e44; font-weight: bold;">Amenity Type</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-pharmacy" name="cb-pharmacy" value="clinic">
+              <label for="cb-pharmacy">pharmacy</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-clinic" name="clinic" value="clinic">
+              <label for="clinic">clinic</label><br>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-hospital" name="hospital" value="hospital">
+              <label for="hospital">hospital</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-dentist" name="dentist" value="dentist">
+              <label for="dentist">dentist</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-doctors" name="doctors" value="doctors">
+              <label for="doctors">doctors</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-laboratory" name="laboratory" value="laboratory">
+              <label for="laboratory">laboratory</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-social-facility" name="social-facility" value="social-facility">
+              <label for="social-facility">social facility</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" id="cb-healthcare" name="healthcare" value="healthcare">
+              <label for="healthcare">healthcare</label>
+            </div>
+          </div>
+          <hr style="margin: 12px 10px 15px 0px;">
+          <div class="row" style="
+              flex-direction: row;
+              flex-flow: row;
+              justify-content: right;
+              margin-right: 20px;
+              align-items: center;">
+              <button id="btn-filter-hierarchical" class="btn btn-primary" value="Filter" style="
+                  width: 20%;
+                  height: 30px;
+                  font-size: 15px;
+                  padding: 3px;">Filter</button>
+              <button id="btn-reset-hierarchical" class="btn" type="reset" value="Reset" style="
+                  width: 20%;
+                  height: 30px;
+                  font-size: 15px;
+                  padding: 3px;">Reset</button>
+          </div>
+        </div>
       </div>
       <div class="col col-md-auto shadow-sm px-3 pt-3 pb-0 mb-2 my-2 ms-2 bg-white rounded" id="num_healthsites_vs_healthcare_workers_per_region">
         <h6>Number of Healthsites vs Healthcare Workers per Region / Province</h6>

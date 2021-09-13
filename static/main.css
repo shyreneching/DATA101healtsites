@@ -74,7 +74,7 @@ p {
 
 #second_row {
   /* background-color: white; */
-  min-height: 650px;
+  min-height: 670px;
   margin: 0px 10px 10px 10px;
 }
 
@@ -235,4 +235,16 @@ option,
   bottom: 0;
   background-color: #DBA9A9;
   color: #464646;
+}
+
+#hierarchical-filter {
+  margin: 20px 15px; 
+  padding: 10px; 
+  border: 2px solid #CE8888; 
+  border-style: solid; 
+  border-radius: 10px;
+}
+
+#hierarchical-filter .form-check {
+  font-size: 15px;
 }
