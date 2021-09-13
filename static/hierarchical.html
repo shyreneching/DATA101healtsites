@@ -9,12 +9,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
   <link rel="stylesheet" href="static/main.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </head>
+<style>
+  text {
+  font: 10px sans-serif;
+}
+
+rect.background {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+</style>
 <body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -49,12 +68,11 @@
         </div>
         
         <div id="hierarchical">
-            
         </div>
     </div>
     
   </div>
 
-  <script type="text/javascript" src="static/hierarchical.js"></script>
+  <script type="text/javascript" src="static\hierarchical.js"></script>
 </body>
 </html>
