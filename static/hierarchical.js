@@ -1,10 +1,10 @@
-var width = 800;
-var height = 800;
-var barStep = 13;
+var width;
+var height;
+var barStep = 17;
 var barPadding = 3 / barStep;
 var data;
 var barHeight = 20;
-var color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"])
+var color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"])
 var duration = 750,
     delay = 25;
 var x, y;
@@ -22,9 +22,9 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     .sort((a, b) => b.value - a.value)
     .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
 
-    margin = {top: 30, right: 120, bottom: 30, left: 120},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    margin = {top: 10, right: 20, bottom: 20, left: 150},
+    width = 600 - margin.left - margin.right,
+    height = 360 - margin.top - margin.bottom;
 
     x = d3.scaleLinear().range([margin.left, width - margin.right])
 
@@ -89,7 +89,10 @@ function bar(svg, down, d, selector) {
         .attr("x", margin.left - 6)
         .attr("y", barStep * (1 - barPadding) / 2)
         .attr("dy", ".35em")
-        .text(d => d.data.name);
+        .text(d => {
+            newname = d.data.name.replace(/ *\([^)]*\) */g, "");;
+            return d.data.name;
+        });
   
     bar.append("rect")
         .attr("x", x(0))
