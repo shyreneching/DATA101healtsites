@@ -1,29 +1,32 @@
-var bar_width;
-var bar_height;
-var barStep = 17;
-var barPadding = 3 / barStep;
-var data;
-var barHeight = 20;
-var color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"])
-var duration = 750,
+// declare variables for the bar chart
+let bar_width, 
+    bar_height, 
+    bar_margin,
+    x, y,
+    svg, base_data,
+    barStep = 17, 
+    barHeight = 20, 
+    duration = 750,
     delay = 25;
-var x, y;
-var bar_margin;
-var svg;
-var base_data;
-var hierarchical_filters;
-var amenity_list = amenity_list = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social-facility', 'healthcare'];
+let barPadding = 3 / barStep;
+let color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"]);
 
-var barTooltip, showBarTooltip, moveBarTooltip, hideBarTooltip;
+// declare filter variables
+let hierarchical_filters;
+let amenity_list = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social-facility', 'healthcare'];
 
+// declare tooltip variables
+let barTooltip, showBarTooltip, moveBarTooltip, hideBarTooltip;
 
+// declare bar chart navigation variables
+let end, exit, enter, enterTransition, exitTransition;
+
+// get data from a nested json to build the chart
 d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
-    data = hierarchicaldata;
+    // set param to global variable base_data
     base_data = hierarchicaldata;
-    console.log(data);
 
-    root = setRoot(data);
-
+    // set up the elements for the chart
     bar_margin = {top: 10, right: 20, bottom: 20, left: 150},
     bar_width = 600 - bar_margin.left - bar_margin.right,
     bar_height = 360 - bar_margin.top - bar_margin.bottom;
@@ -44,8 +47,6 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     .attr("height", bar_height)
     .attr("cursor", "pointer")
     .on("click", (event, d) => up(svg, d));
-
-    console.log("height" + bar_height);
 
     svg.append("g")
     .call(xAxis);
@@ -91,25 +92,24 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
             .style("display", "none")
     }
 
-    x.domain([0, root.value]).nice();
-    down(svg, root);
+    // call to update the chart with the data
+    resetHierarchicalChart();
 });
 
-var xAxis = g => g
+// functions for setting the x and y axes
+let xAxis = g => g
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${bar_margin.top})`)
         .call(d3.axisTop(x).ticks(bar_width / 80, "s"))
         .call(g => (g.selection ? g.selection() : g).select(".domain").remove())
 
-var yAxis = g => g
+let yAxis = g => g
     .attr("class", "y-axis")
     .attr("transform", `translate(${bar_margin.left + 0.5},0)`)
     .call(g => g.append("line")
         .attr("stroke", "currentColor")
         .attr("y1", bar_margin.top)
         .attr("y2", bar_height - bar_margin.bottom))
-
-var end, exit, enter, enterTransition, exitTransition
 
 // Creates a set of bars for the given data node, at the specified index.
 function bar(svg, down, d, selector) {
@@ -145,8 +145,8 @@ function bar(svg, down, d, selector) {
     return g;
   }
 
+// move down to the children of the selected bar if they exist
 function down(svg, d) {
-    console.log("down")
     if (!d.children || this.__transition__) {
         return;
     }
@@ -206,6 +206,7 @@ function down(svg, d) {
         .attr("width", d => x(d.value) - x(0));
 }
 
+// move to the parent bar if it exists
 function up(svg, d) {
     if (!d.parent || !svg.selectAll(".exit").empty()) return;
   
@@ -288,6 +289,7 @@ function stagger() {
     };
 }
 
+// calculates and sets the value of root. This is needed for sorting and summation of values
 function setRoot (d) {
     return d3.hierarchy(d)
     .sum(d => d.value)
@@ -295,6 +297,7 @@ function setRoot (d) {
     .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
 }
 
+// Returns a filtered version of base_data (has to be accessed through new_data[0])
 function filterAmenityData (hierarchicalTree) {
     const new_data = [];
     for (const parent of hierarchicalTree) {
@@ -311,6 +314,7 @@ function filterAmenityData (hierarchicalTree) {
     }
     return new_data;
 }
+
 
 function filterHierarchicalChart () {
     hierarchical_filters = [];
