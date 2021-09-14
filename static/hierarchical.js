@@ -28,7 +28,7 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
 
     // set up the elements for the chart
     bar_margin = {top: 10, right: 20, bottom: 20, left: 150},
-    bar_width = 600 - bar_margin.left - bar_margin.right,
+    bar_width = 620 - bar_margin.left - bar_margin.right,
     bar_height = 360 - bar_margin.top - bar_margin.bottom;
 
     x = d3.scaleLinear().range([bar_margin.left, bar_width - bar_margin.right])
