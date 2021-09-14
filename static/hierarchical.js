@@ -14,6 +14,9 @@ var base_data;
 var hierarchical_filters;
 var amenity_list = amenity_list = ['pharmacy', 'clinic', 'hospital', 'dentist', 'doctors', 'laboratory', 'social-facility', 'healthcare'];
 
+var barTooltip, showBarTooltip, moveBarTooltip, hideBarTooltip;
+
+
 d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     data = hierarchicaldata;
     base_data = hierarchicaldata;
@@ -50,6 +53,44 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     svg.append("g")
     .call(yAxis);
 
+    // -1- Create a barTooltip div that is hidden by default:
+    barTooltip = d3.select("#hierarchical")
+    .append("div")
+    .style("display", "none")
+    .style("opacity", 0)
+    .attr("class", "tooltip tooltip-bubble")
+    .style("background-color", "black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "white")
+
+    // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the barTooltip
+    showBarTooltip = function (event,d) {
+        inFlag = true
+        barTooltip
+            .style("display", "")
+            .style("opacity", 1)
+            .html("<h6>" + d.data.name +
+                "</h6>Total Facilities: " + numberWithCommas(d.value))
+            .style("left", (event.pageX - 150) + "px")
+            .style("top", (event.pageY - 230) + "px")
+    }
+    moveBarTooltip = function (event, d) {
+        if(inFlag){
+            barTooltip
+                .style("left", (event.pageX - 150) + "px")
+                .style("top", (event.pageY - 230) + "px")
+        } else {
+            showBarTooltip(event, d)
+        }
+    }
+    hideBarTooltip = function (event, d) {
+        inFlag = false
+        barTooltip
+            .style("opacity", 0)
+            .style("display", "none")
+    }
+
     x.domain([0, root.value]).nice();
     down(svg, root);
 });
@@ -82,7 +123,10 @@ function bar(svg, down, d, selector) {
       .data(d.children)
       .join("g")
         .attr("cursor", d => !d.children ? null : "pointer")
-        .on("click", (event, d) => down(svg, d));
+        .on("click", (event, d) => down(svg, d))
+        .on("mouseover", showBarTooltip)
+        .on("mousemove", moveBarTooltip)
+        .on("mouseleave", hideBarTooltip);
   
     bar.append("text")
         .attr("x", bar_margin.left - 6)
@@ -104,11 +148,6 @@ function bar(svg, down, d, selector) {
 function down(svg, d) {
     console.log("down")
     if (!d.children || this.__transition__) {
-        console.log("fail")
-        console.log("d")
-        console.log(d)
-        console.log("d.children")
-        console.log(d.children)
         return;
     }
 
