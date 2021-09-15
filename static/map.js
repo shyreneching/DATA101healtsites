@@ -129,9 +129,9 @@ map.on('load', () => {
                 ]
             },
 
-            'circle-color': '#D2285B',
+            'circle-color': '#645986',
             'circle-stroke-width': 1,
-            'circle-stroke-color': '#5C0218'
+            'circle-stroke-color': '#2d3d6f'
         },
     });
 
