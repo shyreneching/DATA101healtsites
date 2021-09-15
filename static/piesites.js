@@ -14,6 +14,8 @@ var colors_piesites = [
   '#7bb9a7'
 ]
 
+var colorScale_sites;
+
 $(document).ready(function () {
     /////////////////////////
     // FOR PIE CHART SITES //
@@ -23,7 +25,7 @@ $(document).ready(function () {
     const pie_height = 200;
     const radius = Math.min(pie_width, pie_height) / 2;
 
-    var colorScale_sites, inFlag = false;
+    var inFlag = false;
   
     // Creates sources <svg> element
     var pie_sites = d3.select("#pie_sites")
