@@ -59,7 +59,7 @@ d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
     .append("div")
     .style("display", "none")
     .style("opacity", 0)
-    .attr("class", "tooltip tooltip-bubble")
+    .attr("class", "tooltip tooltip-bar")
     .style("background-color", "black")
     .style("border-radius", "5px")
     .style("padding", "10px")
