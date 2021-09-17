@@ -157,7 +157,7 @@ function down(svg, d) {
         return;
     }
 
-    console.log(d.data.children[0].name)
+    resetColor ();
 
     for (i in amenity_list) {
         if (d.data.children[0].name === amenity_list[i]) {
@@ -214,7 +214,7 @@ function down(svg, d) {
         .attr("transform", (d, i) => `translate(0,${barStep * i})`);
 
 
-    if (factypes) {
+    if (factypes === true) {
         // Color the bars as parents; they will fade to children if appropriate.
         enter.selectAll("rect")
         .attr("fill", function(d, i) {
@@ -362,8 +362,6 @@ function filterHierarchicalChart () {
 function resetHierarchicalChart () {
     root = setRoot(base_data);
     x.domain([0, root.value]).nice();
-
-    resetColor ();
     down(svg, root);
     for (i in amenity_list) {
         document.getElementById("cb-"+amenity_list[i]).checked = true;
