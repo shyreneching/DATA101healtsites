@@ -10,6 +10,7 @@ let bar_width,
     delay = 25;
 let barPadding = 3 / barStep;
 let color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"]);
+let factypes = false;
 
 // declare filter variables
 let hierarchical_filters;
@@ -20,6 +21,11 @@ let barTooltip, showBarTooltip, moveBarTooltip, hideBarTooltip;
 
 // declare bar chart navigation variables
 let end, exit, enter, enterTransition, exitTransition;
+
+function resetColor () {
+    factypes = false;
+    color = d3.scaleOrdinal([true, false], ["#e17970", "#aaa"]);
+}
 
 // get data from a nested json to build the chart
 d3.json('/hierarchicaldata').then(function (hierarchicaldata) {
@@ -151,6 +157,16 @@ function down(svg, d) {
         return;
     }
 
+    console.log(d.data.children[0].name)
+
+    for (i in amenity_list) {
+        if (d.data.children[0].name === amenity_list[i]) {
+            color = colorScale_sites;
+            factypes = true;
+            break;
+        }
+    }
+
     // Rebind the current node to the background.
     svg.select(".background").datum(d);
 
@@ -197,18 +213,31 @@ function down(svg, d) {
     enter.selectAll("g").transition(transition2)
         .attr("transform", (d, i) => `translate(0,${barStep * i})`);
 
-    // Color the bars as parents; they will fade to children if appropriate.
-    enter.selectAll("rect")
-        .attr("fill", color(true))
+
+    if (factypes) {
+        // Color the bars as parents; they will fade to children if appropriate.
+        enter.selectAll("rect")
+        .attr("fill", function(d, i) {
+            return color(i);
+        })
         .attr("fill-opacity", 1)
         .transition(transition2)
-        .attr("fill", d => color(!!d.children))
         .attr("width", d => x(d.value) - x(0));
+    } else {
+        // Color the bars as parents; they will fade to children if appropriate.
+        enter.selectAll("rect")
+            .attr("fill", color(true))
+            .attr("fill-opacity", 1)
+            .transition(transition2)
+            .attr("fill", d => color(!!d.children))
+            .attr("width", d => x(d.value) - x(0));
+    }
 }
 
 // move to the parent bar if it exists
 function up(svg, d) {
     if (!d.parent || !svg.selectAll(".exit").empty()) return;
+    resetColor ();
   
     // Rebind the current node to the background.
     svg.select(".background").datum(d.parent);
@@ -335,6 +364,7 @@ function resetHierarchicalChart () {
     x.domain([0, root.value]).nice();
     down(svg, root);
 
+    resetColor ();
     for (i in amenity_list) {
         document.getElementById("cb-"+amenity_list[i]).checked = true;
     }
