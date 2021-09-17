@@ -362,9 +362,9 @@ function filterHierarchicalChart () {
 function resetHierarchicalChart () {
     root = setRoot(base_data);
     x.domain([0, root.value]).nice();
-    down(svg, root);
 
     resetColor ();
+    down(svg, root);
     for (i in amenity_list) {
         document.getElementById("cb-"+amenity_list[i]).checked = true;
     }
